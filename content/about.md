@@ -3,15 +3,11 @@ title = "About Hugo"
 date = "2014-04-09"
 +++
 
-Hugo is a static site engine written in Go.
+Hello there! My name is Josue Rodriguez and I am currently pursuing an M.A. in Academic Research in Psychology with a minor in Applied Statistics. Within psychology, my research interests include speech perception and production, probabilistic thinking, and how we can apply machine learning techniques to the field of psychology. 
 
+I also enjoy learning about statistics, data science, and programming in R (although I'm learning Python too!). I hope to combine my love for psychology and statistics in enter a PhD program in Quantitative Psychology. 
 
-It makes use of a variety of open source projects including:
+For now, I am the lab manager for the [Cognition Lab at HSU](https://www2.humboldt.edu/psychology/hands-learning/research-labs/cognition-lab) and an intern at the [HSU Office of Institutional Effectiveness](http://www2.humboldt.edu/irp/).
 
-* [Cobra](https://github.com/spf13/cobra)
-* [Viper](https://github.com/spf13/viper)
-* [J Walter Weatherman](https://github.com/spf13/jWalterWeatherman)
-* [Cast](https://github.com/spf13/cast)
-
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+When I'm not reading or learning to, you can find me watching NBA basketball, hiking in the forest, or watching Westworld.
 

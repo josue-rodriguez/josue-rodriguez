@@ -13,7 +13,7 @@ theme = "hyde-hyde"
 [params]
     author = "Josue Rodriguez"
     title = "Josue Rodriguez"
-    # description = "..."
+    description = "Psychologist. Aspiring data scientist. Hooligan."
     authorimage = "/img/josue.jpg"
     dateformat = "Jan 2, 2006"
     highlightjs = true
@@ -39,5 +39,10 @@ theme = "hyde-hyde"
     identifier = "about"
     weight = 200
     url = "/about/"
+[[menu.main]]
+    name = "CV"
+    identifier = "CV"
+    weight = 200
+    url = "/cv/march_2018_josue.pdf"
     
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
