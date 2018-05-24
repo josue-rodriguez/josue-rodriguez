@@ -1,5 +1,5 @@
 ## Basic Configuration
-baseurl = "https://example.com/"
+baseurl = "https://josue.netlify.com/"
 languageCode = "en"
 
 theme = "hyde-hyde"
@@ -11,8 +11,8 @@ theme = "hyde-hyde"
 
 ## Site Settings
 [params]
-    author = "Author"
-    title = "Title"
+    author = "Josue Rodriguez"
+    title = "Josue Rodriguez"
     # description = "..."
     authorimage = "/img/hugo.png"
     dateformat = "Jan 2, 2006"
@@ -23,14 +23,10 @@ theme = "hyde-hyde"
 
 ## Social Accounts
 [params.social]
-    github = "<username>"
-    instagram = "<username>"
-    xing = "<username>"
-    linkedin = "<username>"
-    twitter = "<username>"
-    facebook = "<username>"
-    stackoverflow = "<username>"
-    email = "your-email@example.com"
+    github = "josue-rodriguez"
+    linkedin = "josue-e-rodriguez"
+    twitter = "josue-e-rodriguez"
+    email = "josue.rodriguez@humboldt.edu"
 
 ## Main Menu
 [[menu.main]]
@@ -43,3 +39,5 @@ theme = "hyde-hyde"
     identifier = "about"
     weight = 200
     url = "/about/"
+    
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
