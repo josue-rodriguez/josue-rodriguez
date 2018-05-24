@@ -29,11 +29,11 @@ theme = "hyde-hyde"
     email = "josue.rodriguez@humboldt.edu"
 
 ## Main Menu
-[[menu.main]]
-    name = "Posts"
-    weight = 100
-    identifier = "posts"
-    url = "/posts/"
+#[[menu.main]]
+#    name = "Posts"
+#    weight = 100
+#    identifier = "posts"
+#    url = "/posts/"
 [[menu.main]]
     name = "About"
     identifier = "about"
