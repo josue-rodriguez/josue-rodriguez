@@ -1,6 +1,6 @@
 +++
-title = "About Hugo"
-date = "2014-04-09"
+title = "About Josue"
+date = "2018-05-24"
 +++
 
 Hello there! My name is Josue Rodriguez and I am currently pursuing an M.A. in Academic Research in Psychology with a minor in Applied Statistics. Within psychology, my research interests include speech perception and production, probabilistic thinking, and how we can apply machine learning techniques to the field of psychology. 
