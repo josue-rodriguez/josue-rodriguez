@@ -40,9 +40,9 @@ theme = "hyde-hyde"
     weight = 200
     url = "/about/"
 [[menu.main]]
-    name = "CV"
-    identifier = "CV"
+    name = "Resume"
+    identifier = "Resume"
     weight = 200
-    url = "/cv/march_2018_josue.pdf"
+    url = "/resume/may_2018_josue.pdf"
     
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
