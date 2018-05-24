@@ -9,5 +9,5 @@ I also enjoy learning about statistics, data science, and programming in R (alth
 
 For now, I am the lab manager for the [Cognition Lab at HSU](https://www2.humboldt.edu/psychology/hands-learning/research-labs/cognition-lab) and an intern at the [HSU Office of Institutional Effectiveness](http://www2.humboldt.edu/irp/).
 
-When I'm not reading or learning to, you can find me watching NBA basketball, hiking in the forest, or watching Westworld.
+When I'm not reading or learning to program, you can find me watching NBA basketball, hiking in the forest, or watching Westworld.
 
