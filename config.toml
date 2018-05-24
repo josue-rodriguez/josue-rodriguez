@@ -14,7 +14,7 @@ theme = "hyde-hyde"
     author = "Josue Rodriguez"
     title = "Josue Rodriguez"
     # description = "..."
-    authorimage = "/img/hugo.png"
+    authorimage = "/img/josue.jpg"
     dateformat = "Jan 2, 2006"
     highlightjs = true
     # highlightjsstyle = "github"
@@ -25,7 +25,7 @@ theme = "hyde-hyde"
 [params.social]
     github = "josue-rodriguez"
     linkedin = "josue-e-rodriguez"
-    twitter = "josue-e-rodriguez"
+    twitter = "shway__"
     email = "josue.rodriguez@humboldt.edu"
 
 ## Main Menu
