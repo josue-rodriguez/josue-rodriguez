@@ -19,9 +19,9 @@ tags: []
 <h1>Results</h1>
 <div id="prevalence-by-year" class="section level2">
 <h2>Prevalence by Year</h2>
-<p>Below are plots that show the proportion (log base 10 transformed) of people named “Taylor” over time. Popularity for the name “Taylor” began rising around the 60s before dipping back down around the 90s.</p>
+<p>Below are plots that show the proportion (log base 10 transformed) of people named “Taylor” over time. Popularity for the name “Taylor” began rising around the 60s before dipping back down in the 90s.</p>
 <p><img src="/post/2018-05-24-analysis-of-a-common-name-in-the-u-s_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /><img src="/post/2018-05-24-analysis-of-a-common-name-in-the-u-s_files/figure-html/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>To test if there is a significant effect of year a linear model was built. Proportion of the population (lob base 10 transformed) was the dependent variable and year was the independent variable. Results of this analysis indicated that year was a significant predictor for proportion of babys named “Taylor”, and the coefficients show a positive slope.</p>
+<p>To test if there is a significant effect of year a linear model was built. Proportion of the population (log base 10 transformed) was the dependent variable and <code>year</code> was the independent variable. Results of this analysis indicated that <code>year</code> was a significant predictor for proportion of babys named “Taylor”, and the coefficients show a positive slope.</p>
 <pre class="r"><code>summary(year.lm)</code></pre>
 <pre><code>## 
 ## Call:

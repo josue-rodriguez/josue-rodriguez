@@ -20,7 +20,7 @@ This is somewhat just a test post. Several months ago, I looked at how common a 
 # Results
 
 ## Prevalence by Year
-Below are plots that show the proportion (log base 10 transformed) of people named "Taylor" over time. Popularity for the name "Taylor" began rising around the 60s before dipping back down around the 90s.
+Below are plots that show the proportion (log base 10 transformed) of people named "Taylor" over time. Popularity for the name "Taylor" began rising around the 60s before dipping back down in the 90s.
 
 ``` {r, fig.align='center', echo = FALSE}
 year.plot
@@ -28,7 +28,7 @@ year.plot
 sex_year.plot
 ```
 
-To test if there is a significant effect of year a linear model was built. Proportion of the population (lob base 10 transformed) was the dependent variable and year was the independent variable. Results of this analysis indicated that year was a significant predictor for proportion of babys named "Taylor", and the coefficients show a positive slope.
+To test if there is a significant effect of year a linear model was built. Proportion of the population (log base 10 transformed) was the dependent variable and `year` was the independent variable. Results of this analysis indicated that `year` was a significant predictor for proportion of babys named "Taylor", and the coefficients show a positive slope.
 
 ``` {r}
 summary(year.lm)
