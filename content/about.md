@@ -3,7 +3,7 @@ title = "About Josue"
 date = "2018-05-24"
 +++
 
-Hello there! My name is Josue Rodriguez and I am currently pursuing an M.A. in Academic Research in Psychology with a minor in Applied Statistics. Within psychology, my research interests include speech perception and production, probabilistic thinking, and how we can apply machine learning techniques to the field of psychology. 
+Hello there! My name is Josue Rodriguez and I am currently pursuing an M.A. in Academic Research in Psychology with a minor in Applied Statistics at Humboldt State University. Within psychology, my research interests include speech perception and production, probabilistic thinking, and how we can apply machine learning techniques to the field of psychology. 
 
 I also enjoy learning about statistics, data science, and programming in R (although I'm learning Python too!). I hope to combine my love for psychology and statistics in enter a PhD program in Quantitative Psychology. 
 
