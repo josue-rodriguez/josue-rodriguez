@@ -13,7 +13,7 @@ theme = "hyde-hyde"
 [params]
     author = "Josue Rodriguez"
     title = "Josue Rodriguez"
-    description = "Psychologist. Aspiring data scientist. Hooligan."
+    description = "psychologist and data scientist in training"
     authorimage = "/img/josue.jpg"
     dateformat = "Jan 2, 2006"
     highlightjs = true
