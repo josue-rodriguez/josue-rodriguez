@@ -27,6 +27,11 @@ theme = "hyde-hyde"
     linkedin = "josue-e-rodriguez"
     twitter = "shway__"
     email = "josue.rodriguez@humboldt.edu"
+  
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
 
 ## Main Menu
 [[menu.main]]
@@ -44,5 +49,8 @@ theme = "hyde-hyde"
     identifier = "Resume"
     weight = 200
     url = "/resume/may_2018_josue.pdf"
+    
+
+
     
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
