@@ -1,5 +1,5 @@
 ## Basic Configuration
-baseurl = "https://josue.netlify.com/"
+baseurl = "https://josue.rbind.io/"
 languageCode = "en"
 
 theme = "hyde-hyde"
@@ -13,7 +13,7 @@ theme = "hyde-hyde"
 [params]
     author = "Josue Rodriguez"
     title = "Josue Rodriguez"
-    description = "psychologist and data scientist in training"
+    description = "psychology, statistics, and open science"
     authorimage = "/img/josue.jpg"
     dateformat = "Jan 2, 2006"
     highlightjs = true
