@@ -45,10 +45,10 @@ theme = "hyde-hyde"
     weight = 200
     url = "/about/"
 [[menu.main]]
-    name = "Resume"
-    identifier = "Resume"
+    name = "CV"
+    identifier = "CV"
     weight = 200
-    url = "/resume/may_2018_josue.pdf"
+    url = "/cv/cv_august_2018.pdf"
     
 
 
