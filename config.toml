@@ -1,5 +1,5 @@
 ## Basic Configuration
-baseurl = "https://josue.rbind.io/"
+baseurl = "https://josue.netlify.com/"
 languageCode = "en"
 
 theme = "hyde-hyde"
