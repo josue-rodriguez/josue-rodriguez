@@ -46,7 +46,7 @@ theme = "hyde-hyde"
     url = "/about/"
 [[menu.main]]
     name = "CV"
-    identifier = "CV"
+    identifier = "cv"
     weight = 200
     url = "/cv/cv_august_2018.pdf"
     
