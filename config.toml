@@ -48,7 +48,7 @@ theme = "hyde-hyde"
     name = "CV"
     identifier = "cv"
     weight = 200
-    url = "/cv/cv_august_2018.pdf"
+    url = "/cv/cv-rodriguez-josue-2018.pdf"
     
 
 
