@@ -25,7 +25,7 @@ theme = "hyde-hyde"
 [params.social]
     github = "josue-rodriguez"
     linkedin = "josue-e-rodriguez"
-    twitter = "shway__"
+    twitter = "josueRstats"
     email = "josue.rodriguez@humboldt.edu"
   
 [sitemap]
