@@ -1,25 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Rmarkdown on </title>
-    <link>/categories/rmarkdown/</link>
-    <description>Recent content in Rmarkdown on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Thu, 24 May 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/rmarkdown/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Analysis of a common name in the U.S.</title>
-      <link>/post/analysis-of-a-common-name-in-the-u-s/</link>
-      <pubDate>Thu, 24 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/analysis-of-a-common-name-in-the-u-s/</guid>
-      <description>IntroductionThis is just test post. Several months ago, I looked at how common a sex ambiguous name, “Taylor”, is in the United States by year (1900 - 2000) and by sex.
-ResultsPrevalence by YearBelow are plots that show the proportion (log base 10 transformed) of people named “Taylor” over time. Popularity for the name “Taylor” began rising around the 60s before dipping back down in the 90s.</description>
-    </item>
-    
-  </channel>
-</rss>
