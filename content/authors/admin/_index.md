@@ -10,13 +10,13 @@ education:
     year: expected 2024
   - course: MA in Psychology
     institution: Humboldt State University
-    year: 2017
+    year: 2019
   - course: Minor in Statistics
     institution: Humboldt State University
-    year: 2017
+    year: 2019
   - course: BA in Psychology
     institution: Humboldt State University
-    year: 2015
+    year: 2017
 email: ""
 interests: 
 - Mixed effects modeling
