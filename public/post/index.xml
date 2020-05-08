@@ -12,5 +12,239 @@
       <link>/post/</link>
     </image>
     
+    <item>
+      <title>Tutorial: Bayesian Testing of Central Structures</title>
+      <link>/post/00-tutorial/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/post/00-tutorial/</guid>
+      <description>
+
+
+&lt;div id=&#34;introduction&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;This tutorial demonstrates how to use networks (specifically Gaussian graphical models or GGMs) to&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Generate hypotheses&lt;/li&gt;
+&lt;li&gt;Perform confirmatory tests on the generated hypotheses&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect. These ideas are expanded upon in our recent paper,“On Formalizing Theoretical Expectations: Bayesian Testing of Central Structures in Pyschological Networks”, where we merge exploratory and confirmatory hypotheses into a cohesive framework based on Bayesian hypothesis testing. You find a preprint &lt;a href=&#34;https://psyarxiv.com/zw7pf/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In what follows, I will describe how you can use &lt;code&gt;R&lt;/code&gt; to perform confirmatory hypothesis tests bases on an initial, exploratoy hypotheses with GGMs. For clarity, some code chunks have been omitted, but the full code to reproduce this document is available on the &lt;a href=&#34;https://osf.io/bh783&#34;&gt;OSF&lt;/a&gt; or &lt;a href=&#34;https://github.com/josue-rodriguez/formalizing-expectations&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;examples&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Examples&lt;/h1&gt;
+&lt;div id=&#34;ptsd-network&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;PTSD Network&lt;/h2&gt;
+&lt;p&gt;To begin we need several packages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;BGGM&lt;/code&gt;: to conduct exploratory and confirmatory analyses with GGMs&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MASS&lt;/code&gt;: to generate data from covariance matrices&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;networktools&lt;/code&gt;: to calculate bridge centrality statistics&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Uncomment and run  if missing packages
+
+# for latest version of BGGM
+# remotes::install_github(&amp;#39;donaldrwilliams/BGGM&amp;#39;) 
+
+# packages &amp;lt;- c(&amp;quot;BGGM&amp;quot;, &amp;quot;MASS&amp;quot;, &amp;quot;networktools&amp;quot;)
+# if (!packages %in% installed.packages()) install.packages(packages)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(MASS)
+library(networktools)
+library(BGGM)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The first dataset contains measurements on 16 PTSD symptoms in 3 communities, “Re-experiencing”, “Avoidance”, and “Arousal”. Only the covariance matrices are available so we have to generate the data using &lt;code&gt;MASS&lt;/code&gt;. The data,&lt;code&gt;ptsd_cor4&lt;/code&gt;, is loaded when we load &lt;code&gt;BGGM&lt;/code&gt;.&lt;/p&gt;
+&lt;div id=&#34;exploratory-analysis&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exploratory analysis&lt;/h3&gt;
+&lt;div id=&#34;estimate-graph&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Estimate graph&lt;/h4&gt;
+&lt;p&gt;Our approach begins by estimating an exploratory network. With &lt;code&gt;BGGM&lt;/code&gt;, this requires calling the &lt;code&gt;explore&lt;/code&gt; function to obtain and sample the posterior distribution. These results are saved in &lt;code&gt;explore_network&lt;/code&gt;. The &lt;code&gt;select&lt;/code&gt; function takes the results from an &lt;code&gt;explore&lt;/code&gt; call, and is used to determine the edge set for &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{A}^{CD}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{A}^{CI}\)&lt;/span&gt; — the conditional (in)dependence structures.&lt;/p&gt;
+&lt;p&gt;Note that we formally incorporate a one-sided hypothesis test. &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_0: \rho_{ij} = 0\)&lt;/span&gt; versus &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_1: \rho_{ij} &amp;gt; 0\)&lt;/span&gt; by setting &lt;code&gt;alternative = &#34;greater&#34;&lt;/code&gt; to determine the edge set. This formally includes the expectation of a “positive manifold”, or that the edges should all be positive.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# sample posterior distribution
+explore_network &amp;lt;- explore(explore_ptsd, chains = 4, cores = 4)
+
+# determine edge set
+selected_network &amp;lt;- select(explore_network, alternative = &amp;quot;exhaustive&amp;quot;, bf_cut = 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can visualize the conditional (in)dependence structures by simply calling &lt;code&gt;plot&lt;/code&gt;. By default, this returns three plots, but we focus on the first two.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bridge-centrality&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Bridge Centrality&lt;/h4&gt;
+&lt;p&gt;We then proceed to calculate bridge strength using the &lt;code&gt;networktools&lt;/code&gt; package. This is similar to node strength, in that, for a given node, it is the sum of the absolute values of its edges. However, bridge strength only takes into account edges that connect a node to different communities, or clusters. Thus, it is a measure of inter-community connectivity, and we use it here to identify central structures in a network.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# extract partial correlations from selected network
+partial_cors &amp;lt;- selected_network$pcor_mat * selected_network$pos_mat
+
+# rename columns with node names
+dimnames(partial_cors) &amp;lt;- list(node_names, node_names)
+
+
+# calculate bridge strength. comms is a vector specifying 
+# the community for each node
+bridge_strengths &amp;lt;- bridge(partial_cors, communities = comms)$`Bridge Strength`
+
+# we use the top 10% in bridge strength as bridge nodes
+bridge_strength_cutoff &amp;lt;- quantile(bridge_strengths, 0.9)
+
+bridge_strengths[bridge_strengths &amp;gt; bridge_strength_cutoff]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    B4    D1 
+## 0.532 0.657&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Calculating bridge strength indicates that nodes B4 and D1 are the top bridge nodes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;plot-bridges&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Plot bridges&lt;/h4&gt;
+&lt;p&gt;A key idea in our paper was that highlighting and “zooming” in on central structures allows researchers to easily formulate hypotheses. For example, we plotted the neighborhood of bridge relations for nodes D1 and B4&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/00-tutorial_files/figure-html/plot-ptsd-bridges-1.png&#34; width=&#34;672&#34; /&gt;&lt;img src=&#34;/post/00-tutorial_files/figure-html/plot-ptsd-bridges-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;confirmatory-analysis&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Confirmatory analysis&lt;/h3&gt;
+&lt;p&gt;With the central structures identified and plotted, we can move on to formulating and testing hypotheses.&lt;/p&gt;
+&lt;p&gt;Note that we generate another dataset here so that we test our hypotheses on different data than our exploratory analysis.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1)
+
+confirm_ptsd &amp;lt;- mvrnorm(n = 926, mu = rep(0, 16), Sigma = ptsd_cor3, empirical = TRUE)
+colnames(confirm_ptsd) &amp;lt;- node_names&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;varying-degrees-of-replication&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Varying degrees of replication&lt;/h4&gt;
+&lt;p&gt;We first focus on node B4 and test the following hypotheses
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+    \mathcal{H}_1&amp;amp;: (\rho_{B4-C1}, \rho_{B4-C7}, \rho_{B4-D3},  \rho_{B4-D4}) &amp;gt; 0 \\ \nonumber
+    \mathcal{H}_2&amp;amp;: \rho_{B4-C1} &amp;gt; (\rho_{B4-C7}, \rho_{B4-D3}, \rho_{B4-D4}) &amp;gt; 0 \\ \nonumber
+    \mathcal{H}_3 &amp;amp;: ``\text{not}\; \mathcal{H}_1 \; \text{or}\; \mathcal{H}_2  \text{.&amp;#39;&amp;#39;}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Above, &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_1\)&lt;/span&gt; is testing for replication of all edges but is otherwise agnostic towards the interplay among bridge relations. &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_2\)&lt;/span&gt; then provides a refined view into the bridge neighborhood by testing an additional constraint that the strongest edge replicated. That is, all of the bridge relations  the strongest edge re-emerged in an independent dataset. Furthermore, &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_2\)&lt;/span&gt; both reflect a positive manifold. We also included &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_3\)&lt;/span&gt; which accounts for structures that are not &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_1\)&lt;/span&gt; or &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_2\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;To test these hypotheses, we can formulate them in a single string and use the &lt;code&gt;confirm&lt;/code&gt; function. Note that hypotheses are separated by a semicolon, and that partial correlations are denoted as &lt;code&gt;node1 -- node2&lt;/code&gt;. The output is obtained by simply printing out the resuls of &lt;code&gt;confirm&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;hyp_var_rep &amp;lt;- c(&amp;quot;(B4--C1, B4--C7, B4--D3, B4--D4) &amp;gt; 0;
+                   B4--C1 &amp;gt; (B4--C7, B4--D3, B4--D4) &amp;gt; 0&amp;quot;)
+
+confirm_var_rep &amp;lt;- confirm(confirm_ptsd,
+                           hyp_var_rep,
+                           iter = 50000)
+confirm_var_rep&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## BGGM: Bayesian Gaussian Graphical Models 
+## Type: continuous 
+## --- 
+## Posterior Samples: 50000 
+## Observations (n): 926 
+## Variables (p): 16 
+## Delta: 15 
+## --- 
+## Call:
+## confirm(Y = confirm_ptsd, hypothesis = hyp_var_rep, iter = 50000)
+## --- 
+## Hypotheses: 
+## 
+## H1: (B4--C1,B4--C7,B4--D3,B4--D4)&amp;gt;0
+## H2: 
+## B4--C1&amp;gt;(B4--C7,B4--D3,B4--D4)&amp;gt;0
+## H3: complement
+## --- 
+## Posterior prob: 
+## 
+## p(H1|data) = 0.197
+## p(H2|data) = 0.797
+## p(H3|data) = 0.006
+## --- 
+## Bayes factor matrix: 
+##       H1    H2      H3
+## H1 1.000 0.247  33.401
+## H2 4.054 1.000 135.404
+## H3 0.030 0.007   1.000
+## --- 
+## note: equal hypothesis prior probabilities&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output includes both the posterior probabilities and all the Bayes factors. The Bayes factors are in reference to the rows relative to the columns. For example the element in the 2nd row and 1st column would be interpreted as &lt;span class=&#34;math inline&#34;&gt;\(\textbf{BF}_{21} = 4.05\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In this case, &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_2\)&lt;/span&gt; is the preferred hypothesis, that is, all of the bridge edges and the strongest edge replicated. This gets at an important notion. It is possible to test &lt;em&gt;varying degrees of replication&lt;/em&gt;.&lt;/p&gt;
+&lt;!-- This analysis also indicates that (1) the bridge relations replicated in an independent dataset; and (2) the relation between ``sleep problems&#39;&#39; (node B4) and ``avoidance of thoughts&#39;&#39; (node C1) \emph{could} be the strongest bridge between the Re-experiencing and Avoidance communities. --&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;comorbidity-network&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Comorbidity Network&lt;/h2&gt;
+&lt;p&gt;We also examined a comorbity network containing 16 symptoms of anxiety and depression, and followed the same steps as above. This dataset is available on the &lt;a href=&#34;https://osf.io/wemcg/&#34;&gt;OSF&lt;/a&gt;. Here, however, we split the data into two because we did not have independent datasets. We formulated hypotheses on one half and tested them on the remaining half.&lt;/p&gt;
+&lt;div id=&#34;exploratory-analysis-1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exploratory analysis&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;explore_network &amp;lt;- explore(explore_anxdep, chains = 4, cores = 4)
+selected_network &amp;lt;- select(explore_network, alternative = &amp;quot;exhaustive&amp;quot;, BF_cut = 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;partial_cors &amp;lt;- selected_network$pcor_mat * selected_network$pos_mat
+
+partial_cors &amp;lt;- round(partial_cors, 4)
+dimnames(partial_cors) &amp;lt;- list(node_names, node_names)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;bridge-strength&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Bridge Strength&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bridge_strengths &amp;lt;- sort(bridge(partial_cors, communities = comms)$`Bridge Strength`, decreasing = TRUE) 
+bridge_strength_cutoff &amp;lt;- quantile(bridge_strengths, 0.9)
+bridge_strengths[bridge_strengths &amp;gt; bridge_strength_cutoff]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    D8    D6 
+## 0.404 0.270&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;plot-bridges-1&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Plot bridges&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;/post/00-tutorial_files/figure-html/plot-anxdep-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;confirmatory-analysis-1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Confirmatory analysis&lt;/h3&gt;
+&lt;div id=&#34;intra--and-inter-bridge-sets&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Intra- and Inter-Bridge Sets&lt;/h4&gt;
+&lt;p&gt;The following hypotheses focus on characterizing bridge sets, or the set of bridge edges belonging to a given symptom. For example, &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_1\)&lt;/span&gt; posits that the bridge set for node D8 is collectively greater than the set for node D6, with constraint that the edges within the bridge set for D8 are equal to each other. This effectively corresponds to testing whether node D8 has greater bridge strength than node D6. &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_2\)&lt;/span&gt; then refines &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_1\)&lt;/span&gt; by testing an exact order both between and within bridge sets.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+\label{eq:intra-inter}
+    \mathcal{H}_1 &amp;amp;: \rho_{D8-A5} = \rho_{D8-A7} &amp;gt; (\rho_{D6-A3}, \rho_{D6-A6}) &amp;gt; 0 \\ \nonumber
+    \mathcal{H}_2 &amp;amp;: \rho_{D8-A5} &amp;gt; \rho_{D8-A7} &amp;gt; \rho_{D6-A3} &amp;gt; \rho_{D6-A6} &amp;gt; 0 \\ \nonumber
+    \mathcal{H}_3 &amp;amp;: ``\text{not}\; \mathcal{H}_1 \; \text{or}\; \mathcal{H}_2 \text{.&amp;#39;&amp;#39;}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Note that the inclusion of an inequality and equality constraint in a single hypothesis is currently only available on the GitHub version for &lt;code&gt;BGGM&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;intra_inter_hyp &amp;lt;- c(&amp;quot;D8--A5 = D8--A7 &amp;gt; (D6--A3, D6--A6) &amp;gt; 0;
+                      D8--A5 &amp;gt; D8--A7 &amp;gt; D6--A3 &amp;gt; D6--A6 &amp;gt; 0&amp;quot;)
+
+confirm_intra_inter &amp;lt;- confirm(Y = confirm_anxdep,
+                               hypothesis = intra_inter_hyp,
+                               iter = 50000)
+confirm_intra_inter &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## BGGM: Bayesian Gaussian Graphical Models 
+## Type: continuous 
+## --- 
+## Posterior Samples: 50000 
+## Observations (n): 515 
+## Variables (p): 16 
+## Delta: 15 
+## --- 
+## Call:
+## confirm(Y = confirm_anxdep, hypothesis = intra_inter_hyp, iter = 50000)
+## --- 
+## Hypotheses: 
+## 
+## H1: D8--A5=D8--A7&amp;gt;(D6--A3,D6--A6)&amp;gt;0
+## H2: 
+## D8--A5&amp;gt;D8--A7&amp;gt;D6--A3&amp;gt;D6--A6&amp;gt;0
+## H3: complement
+## --- 
+## Posterior prob: 
+## 
+## p(H1|data) = 0.037
+## p(H2|data) = 0.954
+## p(H3|data) = 0.009
+## --- 
+## Bayes factor matrix: 
+##        H1    H2      H3
+## H1  1.000 0.039   4.251
+## H2 25.905 1.000 110.115
+## H3  0.235 0.009   1.000
+## --- 
+## note: equal hypothesis prior probabilities&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The data were more likely under both &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_1\)&lt;/span&gt; (&lt;span class=&#34;math inline&#34;&gt;\(\textbf{BF}_{13} = 4.5\)&lt;/span&gt;) and &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_2\)&lt;/span&gt; (&lt;span class=&#34;math inline&#34;&gt;\(\textbf{BF}_{23} = 107\)&lt;/span&gt;) than &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_3\)&lt;/span&gt;. Furthermore, there was more evidence supporting the hypothesis testing solely inequality constraints, &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_2\)&lt;/span&gt;, than the one including an equality constraint (&lt;span class=&#34;math inline&#34;&gt;\(\textbf{BF}_{21} = 110.6\)&lt;/span&gt;). This provides a clear characterization of the the bridge relations at hand — not only did the order of bridge strength replicate, but so did the order of the edges within each bridge set.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bridge-set-separation&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Bridge Set Separation&lt;/h4&gt;
+&lt;p&gt;We also thought it would be interesting to test whether bridge sets include common elements. That is, whether bridge symptoms connect to the same or different nodes. As can be seen above, the bridge sets for nodes D8 and D6 are mutually exclusive. We can then test, say, whether D8 is conditionally independent the bridge set for D6 (nodes A3 and A6)&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+    \mathcal{H}_1 &amp;amp;: (\rho_{D8-A3}, \rho_{D8-A6}) = 0 \\ \nonumber
+    \mathcal{H}_2 &amp;amp;: (\rho_{D8-A3}, \rho_{D8-A6})  &amp;gt; 0 \\ \nonumber
+    \mathcal{H}_3 &amp;amp;: ``\text{not}\; \mathcal{H}_1 \; \text{or} \; \mathcal{H}_2 \text{.&amp;#39;&amp;#39;}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Although the data were more likely under &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_1\)&lt;/span&gt; than &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_3\)&lt;/span&gt; (BF&lt;span class=&#34;math inline&#34;&gt;\(_{13} = 3.7\)&lt;/span&gt;), there was support in favor of &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_2\)&lt;/span&gt; compared to &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{H}_1\)&lt;/span&gt; (BF&lt;span class=&#34;math inline&#34;&gt;\(_{21} = 2\)&lt;/span&gt;). This analysis suggests it is unlikely that D8 is actually conditionally independent from the bridge set for D6.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

@@ -154,4 +154,8 @@
     <loc>/post/</loc>
   </url>
   
+  <url>
+    <loc>/post/00-tutorial/</loc>
+  </url>
+  
 </urlset>
