@@ -39,7 +39,7 @@ csl: apa.csl
 # for latest version of BGGM
 # remotes::install_github(&#39;donaldrwilliams/BGGM&#39;) 
 
-# packages &lt;- c(&quot;BGGM&quot;, &quot;MASS&quot;, &quot;networktools&quot;)
+# packages &lt;- c(&quot;MASS&quot;, &quot;networktools&quot;)
 # if (!packages %in% installed.packages()) install.packages(packages)</code></pre>
 <pre class="r"><code>library(MASS)
 library(networktools)
@@ -48,19 +48,26 @@ library(BGGM)</code></pre>
 <pre class="r"><code>set.seed(1812)
 
 # data for exploratory analyses
-explore_ptsd &lt;- mvrnorm(n = 965, mu = rep(0, 16), Sigma = ptsd_cor4, empirical = TRUE)
+explore_ptsd &lt;- mvrnorm(n = 965, 
+                        mu = rep(0, 16), 
+                        Sigma = ptsd_cor4, 
+                        empirical = TRUE)
 colnames(explore_ptsd) &lt;- node_names</code></pre>
 <div id="exploratory-analysis" class="section level3">
 <h3>Exploratory analysis</h3>
 <div id="estimate-graph" class="section level4">
 <h4>Estimate graph</h4>
-<p>The approach begins by estimating an exploratory network. With <code>BGGM</code>, this requires calling the <code>explore</code> function to obtain and sample the posterior distribution. These results are saved in <code>explore_network</code>. The <code>select</code> function takes the results from an <code>explore</code> call, and is used to determine the edge set for <span class="math inline">\(\mathbf{A}^{CD}\)</span> and <span class="math inline">\(\mathbf{A}^{CI}\)</span> — the conditional (in)dependence structures.</p>
+<p>The approach begins by estimating an exploratory network. With <code>BGGM</code>, this requires calling the <code>explore</code> function to obtain and sample the posterior distribution. These results are saved in <code>explore_network</code>. The <code>select</code> function takes the results from an <code>explore</code> call, and is used to determine the edge set for <span class="math inline">\(\mathbf{A}^{CD}\)</span> and <span class="math inline">\(\mathbf{A}^{CI}\)</span> — the conditional (in)dependence structures. We used <code>type = "continuous"</code> as the data we generated are multivariate normal, but the latest version <code>BGGM</code> can also handle ordinary and binary data.</p>
 <p>Note that <code>alternative = "exhaustive"</code> is used for determining the edge set. This returns three adjacency matrices. One for positive, negative, and null edges. In the paper, we focus on positive and null relations. The former is due to the expectation that edges in psychological networks are expected to be positive (i.e., a positive manifold).</p>
 <pre class="r"><code># sample posterior distribution
-explore_network &lt;- explore(explore_ptsd, chains = 4, cores = 4)
+explore_network &lt;- explore(explore_ptsd, 
+                           type = &quot;continuous&quot;,
+                           iter = 5000)
 
 # determine edge set
-selected_network &lt;- select(explore_network, alternative = &quot;exhaustive&quot;, bf_cut = 3)</code></pre>
+selected_network &lt;- select(explore_network, 
+                           alternative = &quot;exhaustive&quot;, 
+                           bf_cut = 3)</code></pre>
 </div>
 <div id="bridge-centrality" class="section level4">
 <h4>Bridge Centrality</h4>
@@ -77,7 +84,6 @@ bridge_strengths &lt;- bridge(partial_cors, communities = comms)$`Bridge Strengt
 
 # we use the top 10% in bridge strength as bridge nodes
 bridge_strength_cutoff &lt;- quantile(bridge_strengths, 0.9)
-
 bridge_strengths[bridge_strengths &gt; bridge_strength_cutoff]</code></pre>
 <pre><code>##    B4    D1 
 ## 0.532 0.657</code></pre>
@@ -96,7 +102,11 @@ bridge_strengths[bridge_strengths &gt; bridge_strength_cutoff]</code></pre>
 <p>For this confirmatory analysis, data were generated from another correlation matrix <span class="citation">(Sample 3 in Fried et al., 2018)</span>. This was done to test our hypotheses on a different dataset than the one used for exploratory analysis.</p>
 <pre class="r"><code>set.seed(1)
 
-confirm_ptsd &lt;- mvrnorm(n = 926, mu = rep(0, 16), Sigma = ptsd_cor3, empirical = TRUE)
+confirm_ptsd &lt;- mvrnorm(n = 926, 
+                        mu = rep(0, 16), 
+                        Sigma = ptsd_cor3, 
+                        empirical = TRUE)
+
 colnames(confirm_ptsd) &lt;- node_names</code></pre>
 <div id="varying-degrees-of-replication" class="section level4">
 <h4>Varying degrees of replication</h4>
@@ -160,23 +170,32 @@ confirm_var_rep</code></pre>
 <pre class="r"><code>set.seed(27)
 
 cov_anxdep &lt;- read.csv(&quot;../05-data/00-cov-anxdep.csv&quot;)[, -1]
-sim_anxdep &lt;- MASS::mvrnorm(n = 1029, mu = rep(0, 16), Sigma = cov_anxdep, empirical = TRUE)
+sim_anxdep &lt;- MASS::mvrnorm(n = 1029,
+                            mu = rep(0, 16), 
+                            Sigma = cov_anxdep,
+                            empirical = TRUE)
+
 split &lt;- sample(1:1029, size = floor(1029 * .5))
 explore_anxdep &lt;- sim_anxdep[split, ]
 confirm_anxdep &lt;- sim_anxdep[-split, ]</code></pre>
-<pre class="r"><code>explore_network &lt;- explore(explore_anxdep, chains = 4, cores = 4)
-selected_network &lt;- select(explore_network, alternative = &quot;exhaustive&quot;, BF_cut = 3)</code></pre>
+<pre class="r"><code>explore_network &lt;- explore(explore_anxdep, 
+                           type = &quot;continuous&quot;,
+                           iter = 5000)
+
+selected_network &lt;- select(explore_network, 
+                           alternative = &quot;exhaustive&quot;, 
+                           BF_cut = 3)</code></pre>
 <div id="bridge-strength" class="section level4">
 <h4>Bridge Strength</h4>
 <pre class="r"><code>partial_cors &lt;- selected_network$pcor_mat * selected_network$pos_mat
 
 partial_cors &lt;- round(partial_cors, 4)
 dimnames(partial_cors) &lt;- list(node_names, node_names)</code></pre>
-<pre class="r"><code>bridge_strengths &lt;- sort(bridge(partial_cors, communities = comms)$`Bridge Strength`, decreasing = TRUE) 
+<pre class="r"><code>bridge_strengths &lt;- bridge(partial_cors, communities = comms)$`Bridge Strength`
 bridge_strength_cutoff &lt;- quantile(bridge_strengths, 0.9)
 bridge_strengths[bridge_strengths &gt; bridge_strength_cutoff]</code></pre>
-<pre><code>##    D8    D6 
-## 0.404 0.270</code></pre>
+<pre><code>##    D6    D8 
+## 0.270 0.404</code></pre>
 </div>
 <div id="plot-bridges-1" class="section level4">
 <h4>Plot bridges</h4>

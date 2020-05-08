@@ -52,7 +52,7 @@ To begin we need several packages:
 # for latest version of BGGM
 # remotes::install_github('donaldrwilliams/BGGM') 
 
-# packages <- c("BGGM", "MASS", "networktools")
+# packages <- c("MASS", "networktools")
 # if (!packages %in% installed.packages()) install.packages(packages)
 ```
 
@@ -115,7 +115,10 @@ The first dataset contains measurements on 16 PTSD symptoms in 3 communities, "R
 set.seed(1812)
 
 # data for exploratory analyses
-explore_ptsd <- mvrnorm(n = 965, mu = rep(0, 16), Sigma = ptsd_cor4, empirical = TRUE)
+explore_ptsd <- mvrnorm(n = 965, 
+                        mu = rep(0, 16), 
+                        Sigma = ptsd_cor4, 
+                        empirical = TRUE)
 colnames(explore_ptsd) <- node_names
 ```
 
@@ -125,16 +128,20 @@ colnames(explore_ptsd) <- node_names
 
 #### Estimate graph
 
-The approach begins by estimating an exploratory network. With `BGGM`, this requires calling the `explore` function to obtain and sample the posterior distribution. These results are saved in `explore_network`. The `select` function takes the results from an `explore` call, and is used to determine the edge set for $\mathbf{A}^{CD}$ and $\mathbf{A}^{CI}$ --- the conditional (in)dependence structures.
+The approach begins by estimating an exploratory network. With `BGGM`, this requires calling the `explore` function to obtain and sample the posterior distribution. These results are saved in `explore_network`. The `select` function takes the results from an `explore` call, and is used to determine the edge set for $\mathbf{A}^{CD}$ and $\mathbf{A}^{CI}$ --- the conditional (in)dependence structures. We used `type = "continuous"` as the data we generated are multivariate normal, but the latest version `BGGM` can also handle ordinary and binary data. 
 
 Note that `alternative = "exhaustive"` is used for determining the edge set. This returns three adjacency matrices. One for positive, negative, and null edges. In the paper, we focus on positive and null relations. The former is due to the expectation that edges in psychological networks are expected to be positive (i.e., a positive manifold).
 
 ```{r exp-ptsd}
 # sample posterior distribution
-explore_network <- explore(explore_ptsd, chains = 4, cores = 4)
+explore_network <- explore(explore_ptsd, 
+                           type = "continuous",
+                           iter = 5000)
 
 # determine edge set
-selected_network <- select(explore_network, alternative = "exhaustive", bf_cut = 3)
+selected_network <- select(explore_network, 
+                           alternative = "exhaustive", 
+                           bf_cut = 3)
 ```
 
 
@@ -156,7 +163,6 @@ bridge_strengths <- bridge(partial_cors, communities = comms)$`Bridge Strength`
 
 # we use the top 10% in bridge strength as bridge nodes
 bridge_strength_cutoff <- quantile(bridge_strengths, 0.9)
-
 bridge_strengths[bridge_strengths > bridge_strength_cutoff]
 ```
 
@@ -300,7 +306,11 @@ For this confirmatory analysis, data were generated from another correlation mat
 ```{r conf-ptsd}
 set.seed(1)
 
-confirm_ptsd <- mvrnorm(n = 926, mu = rep(0, 16), Sigma = ptsd_cor3, empirical = TRUE)
+confirm_ptsd <- mvrnorm(n = 926, 
+                        mu = rep(0, 16), 
+                        Sigma = ptsd_cor3, 
+                        empirical = TRUE)
+
 colnames(confirm_ptsd) <- node_names
 ```
 
@@ -346,7 +356,11 @@ We also examined a comorbity network containing 16 symptoms of anxiety and depre
 set.seed(27)
 
 cov_anxdep <- read.csv("../05-data/00-cov-anxdep.csv")[, -1]
-sim_anxdep <- MASS::mvrnorm(n = 1029, mu = rep(0, 16), Sigma = cov_anxdep, empirical = TRUE)
+sim_anxdep <- MASS::mvrnorm(n = 1029,
+                            mu = rep(0, 16), 
+                            Sigma = cov_anxdep,
+                            empirical = TRUE)
+
 split <- sample(1:1029, size = floor(1029 * .5))
 explore_anxdep <- sim_anxdep[split, ]
 confirm_anxdep <- sim_anxdep[-split, ]
@@ -378,8 +392,13 @@ colnames(confirm_anxdep) <-  node_names
 ```
 
 ```{r, explore-anxdep}
-explore_network <- explore(explore_anxdep, chains = 4, cores = 4)
-selected_network <- select(explore_network, alternative = "exhaustive", BF_cut = 3)
+explore_network <- explore(explore_anxdep, 
+                           type = "continuous",
+                           iter = 5000)
+
+selected_network <- select(explore_network, 
+                           alternative = "exhaustive", 
+                           BF_cut = 3)
 ```
 
 #### Bridge Strength
@@ -393,7 +412,7 @@ dimnames(partial_cors) <- list(node_names, node_names)
 
 
 ```{r bridge, warning=FALSE}
-bridge_strengths <- sort(bridge(partial_cors, communities = comms)$`Bridge Strength`, decreasing = TRUE) 
+bridge_strengths <- bridge(partial_cors, communities = comms)$`Bridge Strength`
 bridge_strength_cutoff <- quantile(bridge_strengths, 0.9)
 bridge_strengths[bridge_strengths > bridge_strength_cutoff]
 ```
