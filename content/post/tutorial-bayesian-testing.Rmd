@@ -29,7 +29,7 @@ This tutorial demonstrates how to use networks (specifically Gaussian graphical 
 1. Generate hypotheses
 2. Perform confirmatory tests on the generated hypotheses
 
-In psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect. These ideas are expanded upon in our recent paper, "On Formalizing Theoretical Expectations: Bayesian Testing of Central Structures in Pyschological Networks", where we merge exploratory and confirmatory hypotheses into a cohesive framework based on Bayesian hypothesis testing. You can find a preprint [here](https://psyarxiv.com/zw7pf/).
+In psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of as highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect. These ideas are expanded upon in our recent paper, "On Formalizing Theoretical Expectations: Bayesian Testing of Central Structures in Pyschological Networks", where we merge exploratory and confirmatory hypotheses into a cohesive framework based on Bayesian hypothesis testing. You can find a preprint [here](https://psyarxiv.com/zw7pf/).
 
 
 In what follows, I will describe how you can use `R` to perform confirmatory hypothesis tests based on initial, exploratory hypotheses with GGMs. For clarity, some code chunks have been omitted, but the full code to reproduce this document can be obtained on the [Open Science Framework](https://osf.io/bh783) or [GitHub](https://github.com/josue-rodriguez/formalizing-expectations).
@@ -109,7 +109,7 @@ node_cols <- c(
 ```
 
 
-The first dataset contains measurements on 16 PTSD symptoms in 3 communities, "Re-experiencing", "Avoidance", and "Arousal" [Sample 4 in @friedReplicability2018a]. Only the correlations matrices are available so we have to generate the data using `MASS::mvrnorn` with `empirical = TRUE`. This ensures that the generated data have the exact covariance structure we give it. The correlation matrix, `ptsd_cor4`, is loaded with `BGGM`.
+The first dataset contains measurements on 16 PTSD symptoms in 3 communities, "Re-experiencing", "Avoidance", and "Arousal" [Sample 4 in @friedReplicability2018a]. Only the correlations matrices are available so we have to generate the data using `MASS::mvrnorm` with `empirical = TRUE`. This ensures that the generated data have the exact covariance structure we give it. The correlation matrix, `ptsd_cor4`, is loaded with `BGGM`.
 
 ```{r gen-ptsd}
 set.seed(1812)
@@ -125,7 +125,7 @@ colnames(explore_ptsd) <- node_names
 
 #### Estimate graph
 
-The  approach begins by estimating an exploratory network. With `BGGM`, this requires calling the `explore` function to obtain and sample the posterior distribution. These results are saved in `explore_network`. The `select` function takes the results from an `explore` call, and is used to determine the edge set for $\mathbf{A}^{CD}$ and $\mathbf{A}^{CI}$ --- the conditional (in)dependence structures.
+The approach begins by estimating an exploratory network. With `BGGM`, this requires calling the `explore` function to obtain and sample the posterior distribution. These results are saved in `explore_network`. The `select` function takes the results from an `explore` call, and is used to determine the edge set for $\mathbf{A}^{CD}$ and $\mathbf{A}^{CI}$ --- the conditional (in)dependence structures.
 
 Note that `alternative = "exhaustive"` is used for determining the edge set. This returns three adjacency matrices. One for positive, negative, and null edges. In the paper, we focus on positive and null relations. The former is due to the expectation that edges in psychological networks are expected to be positive (i.e., a positive manifold).
 
@@ -140,7 +140,7 @@ selected_network <- select(explore_network, alternative = "exhaustive", bf_cut =
 
 #### Bridge Centrality
 
-The next step is to calculate bridge strength using the `networktools` package. This is similar to node strength, in that, for a given node, it is the sum of the absolute values of its edges. However, bridge strength only takes into account edges that connect a node to different communities, or clusters. Thus, it is a measure of inter-community connectivity, and can be used to identify central structures in a network. 
+The next step is to calculate bridge strength using the `networktools` package. This is similar to node strength, in that, for a given node, it is the sum of the absolute values of its edges. However, bridge strength only takes into account edges that connect to different communities, or clusters. Thus, it is a measure of inter-community connectivity, and can be used to identify central structures in a network. 
 
 
 ```{r bridge-ptsd}
@@ -314,10 +314,10 @@ We first focus on node B4 and test the following hypotheses
     \mathcal{H}_3 &: ``\text{not}\; \mathcal{H}_1 \; \text{or}\; \mathcal{H}_2  \text{.''}
 \end{align}
 
-Above, $\mathcal{H}_1$ is testing for replication of all edges but is otherwise agnostic towards the interplay among bridge relations. $\mathcal{H}_2$ then provides a refined view into the bridge neighborhood by testing an additional constraint that the strongest edge replicated. That is, all of the bridge relations \emph{and} the strongest edge re-emerged in an independent dataset. Furthermore, $\mathcal{H}_1$ and $\mathcal{H}_2$ both reflect a positive manifold. We also included $\mathcal{H}_3$ which accounts for structures that are not $\mathcal{H}_1$ or $\mathcal{H}_2$.
+Above, $\mathcal{H}_1$ is testing for replication of all edges but is otherwise agnostic towards the interplay among bridge relations. $\mathcal{H}_2$ then provides a refined view into the bridge neighborhood by testing an additional constraint that the strongest edge replicated. That is, all of the bridge relations _and_ the strongest edge re-emerged in an independent dataset. Furthermore, $\mathcal{H}_1$ and $\mathcal{H}_2$ both reflect a positive manifold. We also included $\mathcal{H}_3$ which accounts for structures that are not $\mathcal{H}_1$ or $\mathcal{H}_2$.
 
 
-To test these hypotheses, we can formulate them in a single string and use the `confirm` function. Note that hypotheses are separated by a semicolon, and that partial correlations are denoted as `node1 -- node2`. The output is obtained by simply printing out the resuls of `confirm`.
+To test these hypotheses, we can write them out in a single string and use the `confirm` function. Note that hypotheses are separated by a semicolon, and that partial correlations are denoted as `node1 -- node2`. The output is obtained by simply printing out the resuls of `confirm`.
 
 
 ```{r, hyp-var-rep, message=FALSE}
@@ -330,9 +330,9 @@ confirm_var_rep <- confirm(confirm_ptsd,
 confirm_var_rep
 ```
 
-The output includes both the posterior probabilities and all the Bayes factors. The Bayes factors are in reference to the rows relative to the columns. For example the element in the 2nd row and 1st column would be interpreted as $\text{BF}_{21} = 4.05$
+The output includes both the posterior probabilities and all of the Bayes factors. The Bayes factors are in reference to the rows relative to the columns. For example the element in the 2nd row and 1st column would be interpreted as $\text{BF}_{21} = 4.05$
 
-In this case, $\mathcal{H}_2$ is the preferred hypothesis, that is, all of the bridge edges and the strongest edge replicated.  This gets at an important notion. It is possible to test _varying degrees of replication_.
+In this case, $\mathcal{H}_2$ is the preferred hypothesis, that is, all of the bridge edges and the strongest edge replicated. This gets at an important notion. It is possible to test _varying degrees of replication_.
 
 <!-- This analysis also indicates that (1) the bridge relations replicated in an independent dataset; and (2) the relation between ``sleep problems'' (node B4) and ``avoidance of thoughts'' (node C1) \emph{could} be the strongest bridge between the Re-experiencing and Avoidance communities. -->
 
@@ -460,7 +460,7 @@ plot_bridges
 
 #### Intra- and Inter-Bridge Sets
 
-The following hypotheses focus on characterizing bridge sets, or the set of bridge edges belonging to a given symptom. For example, $\mathcal{H}_1$ posits that the bridge set for node D8 is collectively greater than the set for node D6, with constraint that the edges within the bridge set for D8 are equal to each other. This effectively corresponds to testing whether node D8 has greater bridge strength than node D6. $\mathcal{H}_2$ then refines $\mathcal{H}_1$ by testing an exact order both between and within bridge sets.
+The following hypotheses focus on characterizing bridge sets, or the set of bridge edges belonging to a given symptom. For example, $\mathcal{H}_1$ posits that the bridge set for node D8 is collectively greater than the set for node D6, with the constraint that the edges within the bridge set for D8 are equal to each other. This effectively corresponds to testing whether node D8 has greater bridge strength than node D6. $\mathcal{H}_2$ then refines $\mathcal{H}_1$ by testing an exact order both between and within bridge sets.
 
 \begin{align}
 \label{eq:intra-inter}
@@ -508,7 +508,7 @@ Although the data were more likely under $\mathcal{H}_1$ than $\mathcal{H}_3$ ($
 
 # Summary
 
-In this tutorial, I briefly described a framework to formulate and test hypotheses on psychological networks using `BGGM`. The idea is to (1) identify central structures on which you can formulate hypotheses in an exploratory analysis and (2) test those hypotheses on independent data. This brings networks to fruition as tools to generate hypotheses and overcomes the idea that are solely for exploratory purpose.
+In this tutorial, I briefly described a framework to formulate and test hypotheses on psychological networks using `BGGM`. The idea is to (1) identify central structures on which you can formulate hypotheses in an exploratory analysis and (2) test those hypotheses on independent data. This brings networks to fruition as tools to generate hypotheses and overcomes the idea that they are solely for exploratory purposes.
 
 
 In writing the above paper, our hope is that researchers can integrate these methods into their work. We believe that conducting confirmatory tests is an important step forward in psychological networks.

@@ -29,7 +29,7 @@
     
   
   <meta name="description" content="IntroductionThis tutorial demonstrates how to use networks (specifically Gaussian graphical models or GGMs) to
-Generate hypothesesPerform confirmatory tests on the generated hypothesesIn psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect.">
+Generate hypothesesPerform confirmatory tests on the generated hypothesesIn psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of as highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/tutorial-bayesian-testing/">
@@ -117,7 +117,7 @@ Generate hypothesesPerform confirmatory tests on the generated hypothesesIn p
   <meta property="og:url" content="/post/tutorial-bayesian-testing/">
   <meta property="og:title" content="Tutorial: Bayesian Testing of Central Structures in Psychological Networks | Josue Rodriguez">
   <meta property="og:description" content="IntroductionThis tutorial demonstrates how to use networks (specifically Gaussian graphical models or GGMs) to
-Generate hypothesesPerform confirmatory tests on the generated hypothesesIn psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect."><meta property="og:image" content="/img/icon-192.png">
+Generate hypothesesPerform confirmatory tests on the generated hypothesesIn psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of as highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -180,7 +180,7 @@ Generate hypothesesPerform confirmatory tests on the generated hypothesesIn p
       "url": "/img/icon-512.png"
     }
   },
-  "description": "Introduction\rThis tutorial demonstrates how to use networks (specifically Gaussian graphical models or GGMs) to\nGenerate hypotheses\rPerform confirmatory tests on the generated hypotheses\r\rIn psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect."
+  "description": "Introduction\rThis tutorial demonstrates how to use networks (specifically Gaussian graphical models or GGMs) to\nGenerate hypotheses\rPerform confirmatory tests on the generated hypotheses\r\rIn psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of as highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect."
 }
 </script>
 
@@ -579,7 +579,7 @@ Generate hypothesesPerform confirmatory tests on the generated hypothesesIn p
 <li>Generate hypotheses</li>
 <li>Perform confirmatory tests on the generated hypotheses</li>
 </ol>
-<p>In psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect. These ideas are expanded upon in our recent paper, “On Formalizing Theoretical Expectations: Bayesian Testing of Central Structures in Pyschological Networks”, where we merge exploratory and confirmatory hypotheses into a cohesive framework based on Bayesian hypothesis testing. You can find a preprint <a href="https://psyarxiv.com/zw7pf/">here</a>.</p>
+<p>In psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of as highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect. These ideas are expanded upon in our recent paper, “On Formalizing Theoretical Expectations: Bayesian Testing of Central Structures in Pyschological Networks”, where we merge exploratory and confirmatory hypotheses into a cohesive framework based on Bayesian hypothesis testing. You can find a preprint <a href="https://psyarxiv.com/zw7pf/">here</a>.</p>
 <p>In what follows, I will describe how you can use <code>R</code> to perform confirmatory hypothesis tests based on initial, exploratory hypotheses with GGMs. For clarity, some code chunks have been omitted, but the full code to reproduce this document can be obtained on the <a href="https://osf.io/bh783">Open Science Framework</a> or <a href="https://github.com/josue-rodriguez/formalizing-expectations">GitHub</a>.</p>
 </div>
 <div id="examples" class="section level1">
@@ -602,7 +602,7 @@ Generate hypothesesPerform confirmatory tests on the generated hypothesesIn p
 <pre class="r"><code>library(MASS)
 library(networktools)
 library(BGGM)</code></pre>
-<p>The first dataset contains measurements on 16 PTSD symptoms in 3 communities, “Re-experiencing”, “Avoidance”, and “Arousal” <span class="citation">(Sample 4 in Fried et al., 2018)</span>. Only the correlations matrices are available so we have to generate the data using <code>MASS::mvrnorn</code> with <code>empirical = TRUE</code>. This ensures that the generated data have the exact covariance structure we give it. The correlation matrix, <code>ptsd_cor4</code>, is loaded with <code>BGGM</code>.</p>
+<p>The first dataset contains measurements on 16 PTSD symptoms in 3 communities, “Re-experiencing”, “Avoidance”, and “Arousal” <span class="citation">(Sample 4 in Fried et al., 2018)</span>. Only the correlations matrices are available so we have to generate the data using <code>MASS::mvrnorm</code> with <code>empirical = TRUE</code>. This ensures that the generated data have the exact covariance structure we give it. The correlation matrix, <code>ptsd_cor4</code>, is loaded with <code>BGGM</code>.</p>
 <pre class="r"><code>set.seed(1812)
 
 # data for exploratory analyses
@@ -622,7 +622,7 @@ selected_network &lt;- select(explore_network, alternative = &quot;exhaustive&qu
 </div>
 <div id="bridge-centrality" class="section level4">
 <h4>Bridge Centrality</h4>
-<p>The next step is to calculate bridge strength using the <code>networktools</code> package. This is similar to node strength, in that, for a given node, it is the sum of the absolute values of its edges. However, bridge strength only takes into account edges that connect a node to different communities, or clusters. Thus, it is a measure of inter-community connectivity, and can be used to identify central structures in a network.</p>
+<p>The next step is to calculate bridge strength using the <code>networktools</code> package. This is similar to node strength, in that, for a given node, it is the sum of the absolute values of its edges. However, bridge strength only takes into account edges that connect to different communities, or clusters. Thus, it is a measure of inter-community connectivity, and can be used to identify central structures in a network.</p>
 <pre class="r"><code># retain positive partial correlations from selected network
 partial_cors &lt;- selected_network$pcor_mat * selected_network$pos_mat
 
@@ -664,8 +664,8 @@ colnames(confirm_ptsd) &lt;- node_names</code></pre>
     \mathcal{H}_2&amp;: \rho_{B4-C1} &gt; (\rho_{B4-C7}, \rho_{B4-D3}, \rho_{B4-D4}) &gt; 0 \\ \nonumber
     \mathcal{H}_3 &amp;: ``\text{not}\; \mathcal{H}_1 \; \text{or}\; \mathcal{H}_2  \text{.&#39;&#39;}
 \end{align}\]</span></p>
-<p>Above, <span class="math inline">\(\mathcal{H}_1\)</span> is testing for replication of all edges but is otherwise agnostic towards the interplay among bridge relations. <span class="math inline">\(\mathcal{H}_2\)</span> then provides a refined view into the bridge neighborhood by testing an additional constraint that the strongest edge replicated. That is, all of the bridge relations  the strongest edge re-emerged in an independent dataset. Furthermore, <span class="math inline">\(\mathcal{H}_1\)</span> and <span class="math inline">\(\mathcal{H}_2\)</span> both reflect a positive manifold. We also included <span class="math inline">\(\mathcal{H}_3\)</span> which accounts for structures that are not <span class="math inline">\(\mathcal{H}_1\)</span> or <span class="math inline">\(\mathcal{H}_2\)</span>.</p>
-<p>To test these hypotheses, we can formulate them in a single string and use the <code>confirm</code> function. Note that hypotheses are separated by a semicolon, and that partial correlations are denoted as <code>node1 -- node2</code>. The output is obtained by simply printing out the resuls of <code>confirm</code>.</p>
+<p>Above, <span class="math inline">\(\mathcal{H}_1\)</span> is testing for replication of all edges but is otherwise agnostic towards the interplay among bridge relations. <span class="math inline">\(\mathcal{H}_2\)</span> then provides a refined view into the bridge neighborhood by testing an additional constraint that the strongest edge replicated. That is, all of the bridge relations <em>and</em> the strongest edge re-emerged in an independent dataset. Furthermore, <span class="math inline">\(\mathcal{H}_1\)</span> and <span class="math inline">\(\mathcal{H}_2\)</span> both reflect a positive manifold. We also included <span class="math inline">\(\mathcal{H}_3\)</span> which accounts for structures that are not <span class="math inline">\(\mathcal{H}_1\)</span> or <span class="math inline">\(\mathcal{H}_2\)</span>.</p>
+<p>To test these hypotheses, we can write them out in a single string and use the <code>confirm</code> function. Note that hypotheses are separated by a semicolon, and that partial correlations are denoted as <code>node1 -- node2</code>. The output is obtained by simply printing out the resuls of <code>confirm</code>.</p>
 <pre class="r"><code>hyp_var_rep &lt;- c(&quot;(B4--C1, B4--C7, B4--D3, B4--D4) &gt; 0;
                    B4--C1 &gt; (B4--C7, B4--D3, B4--D4) &gt; 0&quot;)
 
@@ -704,7 +704,7 @@ confirm_var_rep</code></pre>
 ## H3 0.030 0.007   1.000
 ## --- 
 ## note: equal hypothesis prior probabilities</code></pre>
-<p>The output includes both the posterior probabilities and all the Bayes factors. The Bayes factors are in reference to the rows relative to the columns. For example the element in the 2nd row and 1st column would be interpreted as <span class="math inline">\(\text{BF}_{21} = 4.05\)</span></p>
+<p>The output includes both the posterior probabilities and all of the Bayes factors. The Bayes factors are in reference to the rows relative to the columns. For example the element in the 2nd row and 1st column would be interpreted as <span class="math inline">\(\text{BF}_{21} = 4.05\)</span></p>
 <p>In this case, <span class="math inline">\(\mathcal{H}_2\)</span> is the preferred hypothesis, that is, all of the bridge edges and the strongest edge replicated. This gets at an important notion. It is possible to test <em>varying degrees of replication</em>.</p>
 <!-- This analysis also indicates that (1) the bridge relations replicated in an independent dataset; and (2) the relation between ``sleep problems'' (node B4) and ``avoidance of thoughts'' (node C1) \emph{could} be the strongest bridge between the Re-experiencing and Avoidance communities. -->
 </div>
@@ -745,7 +745,7 @@ bridge_strengths[bridge_strengths &gt; bridge_strength_cutoff]</code></pre>
 <h3>Confirmatory analysis</h3>
 <div id="intra--and-inter-bridge-sets" class="section level4">
 <h4>Intra- and Inter-Bridge Sets</h4>
-<p>The following hypotheses focus on characterizing bridge sets, or the set of bridge edges belonging to a given symptom. For example, <span class="math inline">\(\mathcal{H}_1\)</span> posits that the bridge set for node D8 is collectively greater than the set for node D6, with constraint that the edges within the bridge set for D8 are equal to each other. This effectively corresponds to testing whether node D8 has greater bridge strength than node D6. <span class="math inline">\(\mathcal{H}_2\)</span> then refines <span class="math inline">\(\mathcal{H}_1\)</span> by testing an exact order both between and within bridge sets.</p>
+<p>The following hypotheses focus on characterizing bridge sets, or the set of bridge edges belonging to a given symptom. For example, <span class="math inline">\(\mathcal{H}_1\)</span> posits that the bridge set for node D8 is collectively greater than the set for node D6, with the constraint that the edges within the bridge set for D8 are equal to each other. This effectively corresponds to testing whether node D8 has greater bridge strength than node D6. <span class="math inline">\(\mathcal{H}_2\)</span> then refines <span class="math inline">\(\mathcal{H}_1\)</span> by testing an exact order both between and within bridge sets.</p>
 <p><span class="math display">\[\begin{align}
 \label{eq:intra-inter}
     \mathcal{H}_1 &amp;: \rho_{D8-A5} = \rho_{D8-A7} &gt; (\rho_{D6-A3}, \rho_{D6-A6}) &gt; 0 \\ \nonumber
@@ -846,7 +846,7 @@ confirm_bridge_sep</code></pre>
 </div>
 <div id="summary" class="section level1">
 <h1>Summary</h1>
-<p>In this tutorial, I briefly described a framework to formulate and test hypotheses on psychological networks using <code>BGGM</code>. The idea is to (1) identify central structures on which you can formulate hypotheses in an exploratory analysis and (2) test those hypotheses on independent data. This brings networks to fruition as tools to generate hypotheses and overcomes the idea that are solely for exploratory purpose.</p>
+<p>In this tutorial, I briefly described a framework to formulate and test hypotheses on psychological networks using <code>BGGM</code>. The idea is to (1) identify central structures on which you can formulate hypotheses in an exploratory analysis and (2) test those hypotheses on independent data. This brings networks to fruition as tools to generate hypotheses and overcomes the idea that they are solely for exploratory purposes.</p>
 <p>In writing the above paper, our hope is that researchers can integrate these methods into their work. We believe that conducting confirmatory tests is an important step forward in psychological networks.</p>
 </div>
 <div id="references" class="section level1 unnumbered">
