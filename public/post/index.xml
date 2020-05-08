@@ -27,8 +27,8 @@
 &lt;li&gt;Generate hypotheses&lt;/li&gt;
 &lt;li&gt;Perform confirmatory tests on the generated hypotheses&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;In psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect. These ideas are expanded upon in our recent paper, “On Formalizing Theoretical Expectations: Bayesian Testing of Central Structures in Pyschological Networks”, where we merge exploratory and confirmatory hypotheses into a cohesive framework based on Bayesian hypothesis testing. You find a preprint &lt;a href=&#34;https://psyarxiv.com/zw7pf/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;In what follows, I will describe how you can use &lt;code&gt;R&lt;/code&gt; to perform confirmatory hypothesis tests bases on an initial, exploratoy hypotheses with GGMs. For clarity, some code chunks have been omitted, but the full code to reproduce can be obtained on the &lt;a href=&#34;https://osf.io/bh783&#34;&gt;Open Science Framework&lt;/a&gt; or &lt;a href=&#34;https://github.com/josue-rodriguez/formalizing-expectations&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect. These ideas are expanded upon in our recent paper, “On Formalizing Theoretical Expectations: Bayesian Testing of Central Structures in Pyschological Networks”, where we merge exploratory and confirmatory hypotheses into a cohesive framework based on Bayesian hypothesis testing. You can find a preprint &lt;a href=&#34;https://psyarxiv.com/zw7pf/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In what follows, I will describe how you can use &lt;code&gt;R&lt;/code&gt; to perform confirmatory hypothesis tests based on initial, exploratory hypotheses with GGMs. For clarity, some code chunks have been omitted, but the full code to reproduce this document can be obtained on the &lt;a href=&#34;https://osf.io/bh783&#34;&gt;Open Science Framework&lt;/a&gt; or &lt;a href=&#34;https://github.com/josue-rodriguez/formalizing-expectations&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;examples&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Examples&lt;/h1&gt;
@@ -52,6 +52,7 @@ library(networktools)
 library(BGGM)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The first dataset contains measurements on 16 PTSD symptoms in 3 communities, “Re-experiencing”, “Avoidance”, and “Arousal” &lt;span class=&#34;citation&#34;&gt;(Sample 4 in Fried et al., 2018)&lt;/span&gt;. Only the correlations matrices are available so we have to generate the data using &lt;code&gt;MASS::mvrnorn&lt;/code&gt; with &lt;code&gt;empirical = TRUE&lt;/code&gt;. This ensures that the generated data have the exact covariance structure we give it. The correlation matrix, &lt;code&gt;ptsd_cor4&lt;/code&gt;, is loaded with &lt;code&gt;BGGM&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1812)
+
 # data for exploratory analyses
 explore_ptsd &amp;lt;- mvrnorm(n = 965, mu = rep(0, 16), Sigma = ptsd_cor4, empirical = TRUE)
 colnames(explore_ptsd) &amp;lt;- node_names&lt;/code&gt;&lt;/pre&gt;
@@ -75,7 +76,6 @@ partial_cors &amp;lt;- selected_network$pcor_mat * selected_network$pos_mat
 
 # rename columns with node names
 dimnames(partial_cors) &amp;lt;- list(node_names, node_names)
-
 
 # calculate bridge strength. comms is a vector specifying 
 # the community for each node
@@ -163,9 +163,8 @@ confirm_var_rep&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We also examined a comorbity network containing 16 symptoms of anxiety and depression &lt;span class=&#34;citation&#34;&gt;(Beard et al., 2016)&lt;/span&gt;, and followed the same steps as above. This dataset is available on the &lt;a href=&#34;https://osf.io/wemcg/&#34;&gt;OSF&lt;/a&gt;. Here, however, we split the data into two because we did not have independent datasets. We formulated hypotheses on one half and tested them on the remaining half.&lt;/p&gt;
 &lt;div id=&#34;exploratory-analysis-1&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Exploratory analysis&lt;/h3&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# libraries
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(27)
 
-set.seed(27)
 cov_anxdep &amp;lt;- read.csv(&amp;quot;../05-data/00-cov-anxdep.csv&amp;quot;)[, -1]
 sim_anxdep &amp;lt;- MASS::mvrnorm(n = 1029, mu = rep(0, 16), Sigma = cov_anxdep, empirical = TRUE)
 split &amp;lt;- sample(1:1029, size = floor(1029 * .5))
@@ -244,7 +243,7 @@ confirm_intra_inter &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bridge-set-separation&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;Bridge Set Separation&lt;/h4&gt;
-&lt;p&gt;We also thought it would be interesting to test whether bridge sets include common elements. That is, whether bridge symptoms connect to the same or different nodes. As can be seen above, the bridge sets for nodes D8 and D6 are mutually exclusive. We can then test, say, whether D8 is conditionally independent the bridge set for D6 (nodes A3 and A6)&lt;/p&gt;
+&lt;p&gt;We also thought it would be interesting to test whether bridge sets include common elements. That is, whether bridge symptoms connect to the same or different nodes. As can be seen above, the bridge sets for nodes D8 and D6 are mutually exclusive. We can then test, say, whether D8 is conditionally independent from the bridge set for D6 (nodes A3 and A6)&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
     \mathcal{H}_1 &amp;amp;: (\rho_{D8-A3}, \rho_{D8-A6}) = 0 \\ \nonumber
     \mathcal{H}_2 &amp;amp;: (\rho_{D8-A3}, \rho_{D8-A6})  &amp;gt; 0 \\ \nonumber
