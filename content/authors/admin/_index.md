@@ -1,8 +1,7 @@
 ---
 authors:
 - admin
-bio: My research interests include distributed robotics, mobile computing and programmable
-  matter.
+bio: 
 education:
   courses:
   - course: PhD in Quantitative Psychology
@@ -26,7 +25,7 @@ name: Josue Rodriguez
 organizations:
 - name: University of California, Davis
   url: ""
-role: PhD Student
+role: PhD Student, Quantitative Psychology
 social:
 - icon: envelope
   icon_pack: fas
