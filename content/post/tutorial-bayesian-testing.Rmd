@@ -177,7 +177,6 @@ coord_d1 <-
     comm = c("3",  "3",  "3",  "1",  "2",  "2",  "2"),
     node = c("B1", "B4", "B2", "D1", "C6", "C1", "C2")
     )
-    
 
 plot_d1 <-
   ggplot(coord_d1, aes(x, y)) +
