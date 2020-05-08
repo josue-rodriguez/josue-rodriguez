@@ -113,6 +113,7 @@ The first dataset contains measurements on 16 PTSD symptoms in 3 communities, "R
 
 ```{r gen-ptsd}
 set.seed(1812)
+
 # data for exploratory analyses
 explore_ptsd <- mvrnorm(n = 965, mu = rep(0, 16), Sigma = ptsd_cor4, empirical = TRUE)
 colnames(explore_ptsd) <- node_names
@@ -148,7 +149,6 @@ partial_cors <- selected_network$pcor_mat * selected_network$pos_mat
 
 # rename columns with node names
 dimnames(partial_cors) <- list(node_names, node_names)
-
 
 # calculate bridge strength. comms is a vector specifying 
 # the community for each node
@@ -344,15 +344,15 @@ We also examined a comorbity network containing 16 symptoms of anxiety and depre
 ### Exploratory analysis
 
 ```{r setup-anxdep1}
-# libraries
-
 set.seed(27)
+
 cov_anxdep <- read.csv("../05-data/00-cov-anxdep.csv")[, -1]
 sim_anxdep <- MASS::mvrnorm(n = 1029, mu = rep(0, 16), Sigma = cov_anxdep, empirical = TRUE)
 split <- sample(1:1029, size = floor(1029 * .5))
 explore_anxdep <- sim_anxdep[split, ]
 confirm_anxdep <- sim_anxdep[-split, ]
 ```
+
 ```{r setup-anxdep2, include=FALSE}
 col_names <- 
   sub(pattern = "[A-Z].",
