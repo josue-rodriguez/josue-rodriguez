@@ -29,7 +29,7 @@
     
   
   <meta name="description" content="IntroductionThis tutorial demonstrates how to use networks (specifically Gaussian graphical models or GGMs) to
-Generate hypothesesPerform confirmatory tests on the generated hypothesesIn psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of as highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect.">
+Generate hypothesesPerform confirmatory tests on the generated hypothesesNetwork theory has emerged as a popular framework for conceptualizing psychological constructs and mental disorders. Initially, network analysis was motivated in part by the thought that it can be used for hypothesis generation. Although the customary approach for network modeling is inherently exploratory, we argue that there is untapped potential for confirmatory hypothesis testing.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/tutorial-bayesian-testing/">
@@ -40,7 +40,7 @@ Generate hypothesesPerform confirmatory tests on the generated hypothesesIn p
   
   
   
-  <meta name="theme-color" content="#2962ff">
+  <meta name="theme-color" content="hsl(339, 90%, 68%)">
   
 
   
@@ -61,8 +61,8 @@ Generate hypothesesPerform confirmatory tests on the generated hypothesesIn p
       
       
         
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark">
         
       
     
@@ -84,7 +84,7 @@ Generate hypothesesPerform confirmatory tests on the generated hypothesesIn p
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.04a87a1cb9027e3c50f566322527c56f.css">
+  <link rel="stylesheet" href="/css/academic.min.7ad7088f6823d5f270888524da55d75d.css">
 
   
 
@@ -117,7 +117,7 @@ Generate hypothesesPerform confirmatory tests on the generated hypothesesIn p
   <meta property="og:url" content="/post/tutorial-bayesian-testing/">
   <meta property="og:title" content="Tutorial: Bayesian Testing of Central Structures in Psychological Networks | Josue Rodriguez">
   <meta property="og:description" content="IntroductionThis tutorial demonstrates how to use networks (specifically Gaussian graphical models or GGMs) to
-Generate hypothesesPerform confirmatory tests on the generated hypothesesIn psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of as highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect."><meta property="og:image" content="/img/icon-192.png">
+Generate hypothesesPerform confirmatory tests on the generated hypothesesNetwork theory has emerged as a popular framework for conceptualizing psychological constructs and mental disorders. Initially, network analysis was motivated in part by the thought that it can be used for hypothesis generation. Although the customary approach for network modeling is inherently exploratory, we argue that there is untapped potential for confirmatory hypothesis testing."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -180,7 +180,7 @@ Generate hypothesesPerform confirmatory tests on the generated hypothesesIn p
       "url": "/img/icon-512.png"
     }
   },
-  "description": "Introduction\rThis tutorial demonstrates how to use networks (specifically Gaussian graphical models or GGMs) to\nGenerate hypotheses\rPerform confirmatory tests on the generated hypotheses\r\rIn psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of as highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect."
+  "description": "Introduction\rThis tutorial demonstrates how to use networks (specifically Gaussian graphical models or GGMs) to\nGenerate hypotheses\rPerform confirmatory tests on the generated hypotheses\r\rNetwork theory has emerged as a popular framework for conceptualizing psychological constructs and mental disorders. Initially, network analysis was motivated in part by the thought that it can be used for hypothesis generation. Although the customary approach for network modeling is inherently exploratory, we argue that there is untapped potential for confirmatory hypothesis testing."
 }
 </script>
 
@@ -202,7 +202,7 @@ Generate hypothesesPerform confirmatory tests on the generated hypothesesIn p
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="dark">
 
   <aside class="search-results" id="search">
   <div class="container">
@@ -579,7 +579,8 @@ Generate hypothesesPerform confirmatory tests on the generated hypothesesIn p
 <li>Generate hypotheses</li>
 <li>Perform confirmatory tests on the generated hypotheses</li>
 </ol>
-<p>In psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of as highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect. These ideas are expanded upon in our recent paper, “On Formalizing Theoretical Expectations: Bayesian Testing of Central Structures in Pyschological Networks”, where we merge exploratory and confirmatory hypotheses into a cohesive framework based on Bayesian hypothesis testing. You can find a preprint <a href="https://psyarxiv.com/zw7pf/">here</a>.</p>
+<!-- In psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of as highly exploratory tools, despite their potential for confirmatory tests.  -->
+<p>Network theory has emerged as a popular framework for conceptualizing psychological constructs and mental disorders. Initially, network analysis was motivated in part by the thought that it can be used for hypothesis generation. Although the customary approach for network modeling is inherently exploratory, we argue that there is untapped potential for confirmatory hypothesis testing. These ideas are expanded upon in our recent paper, “On Formalizing Theoretical Expectations: Bayesian Testing of Central Structures in Pyschological Networks”, where we merge exploratory and confirmatory hypotheses into a cohesive framework based on Bayesian hypothesis testing. You can find the preprint <a href="https://psyarxiv.com/zw7pf/">here</a>.</p>
 <p>In what follows, I will describe how you can use <code>R</code> to perform confirmatory hypothesis tests based on initial, exploratory hypotheses with GGMs. For clarity, some code chunks have been omitted, but the full code to reproduce this document can be obtained on the <a href="https://osf.io/bh783">Open Science Framework</a> or <a href="https://github.com/josue-rodriguez/formalizing-expectations">GitHub</a>.</p>
 </div>
 <div id="examples" class="section level1">
@@ -675,7 +676,7 @@ colnames(confirm_ptsd) &lt;- node_names</code></pre>
     \mathcal{H}_3 &amp;: ``\text{not}\; \mathcal{H}_1 \; \text{or}\; \mathcal{H}_2  \text{.&#39;&#39;}
 \end{align}\]</span></p>
 <p>Above, <span class="math inline">\(\mathcal{H}_1\)</span> is testing for replication of all edges but is otherwise agnostic towards the interplay among bridge relations. <span class="math inline">\(\mathcal{H}_2\)</span> then provides a refined view into the bridge neighborhood by testing an additional constraint that the strongest edge replicated. That is, all of the bridge relations <em>and</em> the strongest edge re-emerged in an independent dataset. Furthermore, <span class="math inline">\(\mathcal{H}_1\)</span> and <span class="math inline">\(\mathcal{H}_2\)</span> both reflect a positive manifold. We also included <span class="math inline">\(\mathcal{H}_3\)</span> which accounts for structures that are not <span class="math inline">\(\mathcal{H}_1\)</span> or <span class="math inline">\(\mathcal{H}_2\)</span>.</p>
-<p>To test these hypotheses, we can write them out in a single string and use the <code>confirm</code> function. Note that hypotheses are separated by a semicolon, and that partial correlations are denoted as <code>node1 -- node2</code>. The output is obtained by simply printing out the resuls of <code>confirm</code>.</p>
+<p>To test these hypotheses, we can write them out in a single string and use the <code>confirm</code> function. Note that hypotheses are separated by a semicolon, and that partial correlations are denoted as <code>node1 -- node2</code>. The output is obtained by simply printing out the results of <code>confirm</code>.</p>
 <pre class="r"><code>hyp_var_rep &lt;- c(&quot;(B4--C1, B4--C7, B4--D3, B4--D4) &gt; 0;
                    B4--C1 &gt; (B4--C7, B4--D3, B4--D4) &gt; 0&quot;)
 

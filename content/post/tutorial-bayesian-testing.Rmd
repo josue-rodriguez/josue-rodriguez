@@ -29,7 +29,11 @@ This tutorial demonstrates how to use networks (specifically Gaussian graphical 
 1. Generate hypotheses
 2. Perform confirmatory tests on the generated hypotheses
 
-In psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of as highly exploratory tools, despite their potential for confirmatory tests. However, there is plenty of room for networks in this respect. These ideas are expanded upon in our recent paper, "On Formalizing Theoretical Expectations: Bayesian Testing of Central Structures in Pyschological Networks", where we merge exploratory and confirmatory hypotheses into a cohesive framework based on Bayesian hypothesis testing. You can find a preprint [here](https://psyarxiv.com/zw7pf/).
+
+<!-- In psychology, network models are almost never used to generate hypotheses. This is puzzling because one of the original reasons researchers began using them was exactly this. Networks are also thought of as highly exploratory tools, despite their potential for confirmatory tests.  -->
+
+
+Network theory has emerged as a popular framework for conceptualizing psychological constructs and mental disorders. Initially, network analysis was motivated in part by the thought that it can be used for hypothesis generation. Although the customary approach for network modeling is inherently exploratory, we argue that there is untapped potential for confirmatory hypothesis testing. These ideas are expanded upon in our recent paper, "On Formalizing Theoretical Expectations: Bayesian Testing of Central Structures in Pyschological Networks", where we merge exploratory and confirmatory hypotheses into a cohesive framework based on Bayesian hypothesis testing. You can find the preprint [here](https://psyarxiv.com/zw7pf/).
 
 
 In what follows, I will describe how you can use `R` to perform confirmatory hypothesis tests based on initial, exploratory hypotheses with GGMs. For clarity, some code chunks have been omitted, but the full code to reproduce this document can be obtained on the [Open Science Framework](https://osf.io/bh783) or [GitHub](https://github.com/josue-rodriguez/formalizing-expectations).
@@ -327,7 +331,7 @@ We first focus on node B4 and test the following hypotheses
 Above, $\mathcal{H}_1$ is testing for replication of all edges but is otherwise agnostic towards the interplay among bridge relations. $\mathcal{H}_2$ then provides a refined view into the bridge neighborhood by testing an additional constraint that the strongest edge replicated. That is, all of the bridge relations _and_ the strongest edge re-emerged in an independent dataset. Furthermore, $\mathcal{H}_1$ and $\mathcal{H}_2$ both reflect a positive manifold. We also included $\mathcal{H}_3$ which accounts for structures that are not $\mathcal{H}_1$ or $\mathcal{H}_2$.
 
 
-To test these hypotheses, we can write them out in a single string and use the `confirm` function. Note that hypotheses are separated by a semicolon, and that partial correlations are denoted as `node1 -- node2`. The output is obtained by simply printing out the resuls of `confirm`.
+To test these hypotheses, we can write them out in a single string and use the `confirm` function. Note that hypotheses are separated by a semicolon, and that partial correlations are denoted as `node1 -- node2`. The output is obtained by simply printing out the results of `confirm`.
 
 
 ```{r, hyp-var-rep, message=FALSE}
