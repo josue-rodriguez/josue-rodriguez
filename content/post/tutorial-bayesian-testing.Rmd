@@ -521,8 +521,8 @@ hyp_bridge_sep <- ("(D8--A3, D8--A6) = 0;
                     (D8--A3, D8--A6) > 0")
 
 confirm_bridge_sep <- confirm(Y = confirm_anxdep,
-                      hypothesis = hyp_bridge_sep,
-                      iter = 50000)
+                              hypothesis = hyp_bridge_sep,
+                              iter = 50000)
 confirm_bridge_sep
 ```
 
