@@ -273,8 +273,8 @@ confirm_intra_inter &lt;/code&gt;&lt;/pre&gt;
                     (D8--A3, D8--A6) &amp;gt; 0&amp;quot;)
 
 confirm_bridge_sep &amp;lt;- confirm(Y = confirm_anxdep,
-                      hypothesis = hyp_bridge_sep,
-                      iter = 50000)
+                              hypothesis = hyp_bridge_sep,
+                              iter = 50000)
 confirm_bridge_sep&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## BGGM: Bayesian Gaussian Graphical Models 
 ## Type: continuous 
