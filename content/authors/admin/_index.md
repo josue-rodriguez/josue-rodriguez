@@ -29,7 +29,7 @@ role: PhD Student, Quantitative Psychology
 social:
 - icon: envelope
   icon_pack: fas
-  link: '#contact'
+  link: 'mailto:jerrodriguez@ucdavis.edu'
 - icon: twitter
   icon_pack: fab
   link: https://twitter.com/josueRstats
