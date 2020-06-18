@@ -59,7 +59,7 @@ To show this effect, I will check the coverage rates and sampling distributions 
 &lt;li&gt;Compute a credibility interval for the expected influence&lt;/li&gt;
 &lt;li&gt;Check whether the interval covered the true expected influence value&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Note to clearly show the distorted sampling distribution, I kept track of two values that often came up “significant” (1–2 and 1–5) even though there were no true zeros.&lt;/p&gt;
+&lt;p&gt;Note, to clearly show the distorted sampling distribution, I kept track of a single partial correlation that often came up as “significant”.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#==========
 # Set up 
 #==========
