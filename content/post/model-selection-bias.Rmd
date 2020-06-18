@@ -1,0 +1,218 @@
+---
+title: "Model Selection Bias"
+author: "Josue E. Rodriguez"
+date: "2020-06-16"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 4
+draft: true
+bibliography: [C:/Users/josue/Box/testing-sums/ref.bib]
+csl: apa.csl
+tags: 
+  - R
+  - model selection
+  - inference
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+knitr::opts_knit$set(root.dir = "C:/Users/josue/Box/testing-sums/01-code")
+```
+
+```{r libs, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(BGGM)
+
+load("coverage-data.RData")
+
+pal <- c("#FBE697", "#F3AE6D", "#516888")
+```
+
+Over the last few months, a frequent topic of conversation with my [lab mate Donny](https://twitter.com/wdonald_1985) has been the issue of *valid* inference following model selection, or model selection bias. This problem has been recognized since [at least 1963](https://mathscinet.ams.org/mathscinet-getitem?mr=0150864) and has been written about extensively since then. Some resources I have found both helpful and accessible in understanding model selection bias can be found [here](https://arxiv.org/abs/1306.1059), [here](https://www.jstor.org/stable/3533623), and [here](http://bactra.org/notebooks/post-model-selection-inference.html). However, this issue is still pervasive among social and behavioral scientists ^[Other fields as well but I'm in psychology so that is my focus], so I am writing a short post here in hopes of clarifying the ramifications of selecting a model.
+
+# What is model selection bias? 
+
+To understand model selection bias, it is helpful to understand what constitutes model selection. 
+
+**Model selection** occurs when a procedure in which the data itself is used to select variables, or the final model. This includes when statistical models are chosen based on things like minimizing cross-validation error, penalty-based criteria (e.g., AIC, LASSO, etc.) or stagewise selection, among others.
+
+**Model selection bias** occurs when, after a model selection procedure, researchers proceed with inference "as usual" (i.e., as if the model were known *a priori*) [@leebMODEL2005].
+
+In psychology, perhaps the most common example of model selection bias occurs with linear models. Say you estimate a multiple regression and after examining the predictors and their associated *p*-values, you decide to drop those with "non-significant" *p*-values according to some $\alpha$ level. You then refit the model using only the "significant" predictors and proceed with inference. This procedure is a form of model selection and the resulting inference will suffer from model selection bias. 
+
+# Why does model selection bias matter?
+
+Although students are commonly taught to remove "insignificant" predictors or use information criteria to find the most parsimonious model, **model selection bias distorts the sampling distribution of parameter estimates and results in more Type I errors** [@berkValid2013; @leebMODEL2005].
+
+
+## Why does this occur? 
+
+An assumption behind the majority of inferential procedures is that the model is **fixed**, but model selection makes the model itself **random**. Inferential procedures typically do not account for this stochastic aspect. Let's take a second to think about why model selection introduces randomness by using confidence intervals. 
+
+
+[Wikipedia](https://en.wikipedia.org/wiki/Confidence_interval#Meaning_and_interpretation) defines a 90% confidence interval in terms of sampling by stating 
+
+> Were this procedure to be repeated on numerous samples, the fraction of calculated confidence intervals (which would differ for each sample) that encompass the true population parameter would tend toward 90%."
+
+What I would like to emphasize here is that that valid confidence intervals have a long run guarantee of covering the true population parameter (approximately) 90 out of 100 times, and this guarantee is based on carrying out the same procedure repeatedly. In this context, procedure refers to an *estimation* procedure and implies that the statistical model used for inference does not change from sample to sample. 
+
+Now, suppose we have collected some data and we have some candidate set of predictors. We then pick a subset of these predictors according to some model selection procedure and estimate a model with this subset. The end result is an estimation procedure that is *conditional on the selected variables*. 
+
+If we do this repeatedly --- collect some new data, select a model, and fit it with the selected predictors --- there is no guarantee that the estimation procedure will have the same predictors each time ^[One could argue that this is not an issue with a consistent model selector or large enough sample sizes, but see @leebMODEL2005]. It is this randomness introduced by model selection that invalidates the properties of classical inference. 
+    
+
+# Small simulation study
+
+I would like to illustrate the effect of model selection on inference with a recent project I've been working on. I will be going walking through some code to illustrate the distorted sampling distribution and coverate rates that result from model selection bias. If you don't feel like going through the code, I've included the resulting plots here so you can see what happens. Otherwise, please feel free to continue reading to see exactly how these plots came to be.  
+
+```{r make_plots, echo=FALSE, fig.height=7, dpi=320}
+cowplot::plot_grid(
+  coverage_plot,
+  NULL,
+  trunc_plot,
+  nrow = 3,
+  rel_heights = c(10, 1, 10)
+)
+```
+
+In psychology, network researchers are often interested in estimating the conditional (in)dependence structure between a set of variables, say PTSD symptoms, using partial correlation networks, or Gaussian graphical models. Typically this involves a model selection stage where partial correlations are set to zero either through a hypothesis test or some form of regularization. As previously mentioned, this can have a serious effect on inference. 
+To show this effect, I will check the coverage rates and sampling distributions for a parameter of interest with and without selecting a model. Here I use the sum of partial correlations, or "edges", for a given variable (i.e., "expected influence"). 
+
+Here I used the `R` package [BGGM](https://github.com/donaldRwilliams/BGGM) [@williamsBayesian2019a] ^[If you have any interest in network models at all I highly suggest checking out the BGGM package! It offers a variety of flexible methods for both exploratory and confirmatory analyses plus it now handles ordinal data and VAR models] to estimate networks with and without a model selection stage. This package estimates networks under a Bayesian framework so credible intervals were computed instead of confidence intervals. Although credible intervals have a different interpretation than confidence intervals ^[A 90% credible interval can literally be interpreted as a 90% probability that the true parameter value is covered, given the data], their coverage properties remain the same (searching "frequentist properties of Bayesian methods" yields some interesting pages). 
+
+The simulation steps went as follows:
+
+1. Randomly sample observations from a multivariate normal distribution
+2. Estimate the partial correlation network
+3. If performing model selection, set "insignificant" partial correlations to zero
+4. Compute expected influence from the posterior distributions of "significant" partial correlations
+5. Compute a credibility interval for the expected influence
+6. Check whether the interval covered the true expected influence value 
+
+Note to clearly show the distorted sampling distribution, I kept track of two values that often came up "significant" (1--2 and 1--5) even though there were no true zeros. 
+
+
+```{r eval=FALSE}
+#==========
+# Set up 
+#==========
+
+set.seed(24)
+# number of variables
+p <- 10
+# number of (partial) cors
+len_out <- p * (p - 1) / 2 
+# values for cors
+sample_space <- seq(0.1, 0.4, by = 0.001)
+rhos <- sample(sample_space, size = len_out, replace = TRUE) 
+
+# covariance matrix
+S <- matrix(1, p, p)
+S[lower.tri(S)] <- rhos
+S[upper.tri(S)] <- t(S)[upper.tri(S)]
+# partial cor matrix
+true_pcors <- -cov2cor(solve(S))
+# true sum value
+true_ei <- sum(true_pcors[1, -1])
+# [1] 0.7456753
+
+true_pcors[1, 6]
+# [1] 0.1811494
+
+# sample size for each trial
+n <- 100
+
+# number of trials
+niter <- 1500
+
+#============================
+# Conditional selection
+#============================
+
+# containers
+covered_condit <- mean_condit_ei <- rep(NA, niter)
+
+for (iter in 1:niter) {
+  # sample data and fit GGM
+  Y <- MASS::mvrnorm(n, rep(0, p), S)
+  fit <- estimate(Y, iter = 1000, progress = FALSE)
+  sel <- select(fit)
+  
+  # if none are selected move on to next iteration
+  if (all(sel$adj[1, ] == 0)) {
+    next
+  }
+  
+  # select "significant" nodes
+  selected_pcors <- array(NA, dim = dim(sel$object$post_samp$pcors))
+  selected_pcors[] <- apply(sel$object$post_samp$pcors, 3, function(x) sel$adj * x)
+  
+  # true value of sum for selected nodes
+  true_conditional <- sum(true_pcors[1, ] * sel$adj[1, ])
+  
+  # compute expected influence for selected nodes
+  ei <- colSums(selected_pcors[1,,])
+  
+  # compute 90% credible interval
+  cri <- quantile(ei, probs = c(0.05, 0.95) )
+  
+  # check if true sum is covered in credible interval
+  covered_condit[iter] <- ifelse(cri[1] < true_conditional & 
+                                   cri[2] > true_conditional, 1, 0)
+  
+  # keep track of particular relationship to plot sampling distribution
+  if (sel$adj[1, 6] == 1) {
+    mean_condit_ei[iter] <- mean(selected_pcors[1, 6, ])
+  }
+}
+
+
+#============================
+# Unconditional selection
+#============================
+
+covered_full <- mean_full_ei <- rep(NA, niter)
+
+# full
+for (iter in 1:niter){
+  Y <- MASS::mvrnorm(n, rep(0, p), S)
+  fit <- estimate(Y, iter = 1000, progress = FALSE)
+  
+  ei <- colSums(fit$post_samp$pcors[1,,])
+  
+  cri <- quantile(ei, probs = c(0.05, 0.95) )
+
+  mean_full_ei[iter] <- mean(fit$post_samp$pcors[1, 6, ])
+  
+  covered_full[iter] <- ifelse(cri[1] < true_ei & 
+                                 true_ei < cri[2], 1, 0)
+}
+```
+
+## Coverage
+
+After running this simulation, taking the means of `covered_condit` and `covered_full` yields the proportion of times that the credible interval covered the true parameter value when a model was selected and when it was not
+
+```{r echo=FALSE}
+coverage_plot
+```
+
+
+It is clear to see from this plot that when we a model is not selected, the coverage rate is just about what we would expect --- about 90 in every 100 credible intervals contained the true value for expected influence. When the model was selected prior to computing this interval, the true value was covered much less, about 70 in 100 times!
+
+
+## Sampling Distribution
+
+Recall that model selection also distorts the sampling distribution of parameters. In the simulations, I kept track of the partial correlation between variables 1 and 6. On each simulation trial, I simply took the mean of the posterior distribution for this parameter. While we would expect to see the means normally distributed around the true value (red line), the distribution is truncated when a model is selected. This results in overconfident inferences about the population value. Also notice that only model selection is biased towards large effects as any sample with a value less than an absolute value of about 0.20 was never selected. 
+
+```{r echo=FALSE}
+trunc_plot
+```
+
+The simulations and plots are simple, but they convey a powerful idea. Model selection distorts inferential properties such as coverage rates and sampling distributions. 
+
+# References
+

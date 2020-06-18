@@ -43,7 +43,7 @@ superuser: true
 user_groups:
 ---
 
-Hi! My name is Josue. I am a first year graduate student in Quantitative Psychology at the UC Davis. Prior to beginning my PhD, I completed my Bachelor's and Master's degrees in Experimental Psychology at Humboldt State University, along with a minor in statistics. I’m interested in developing statistical tools and methods to help social and behavioral scientists better answer the questions they ask. Currently I'm exploring Bayesian (informative) hypothesis testing in both mixed effects and network models.
+Hi! My name is Josue. I am a first year graduate student in Quantitative Psychology at UC Davis. Prior to beginning my PhD, I attended Humboldt State University where I completed a BA and MA in Experimental Psychology, along with a minor in statistics. I’m interested in developing statistical tools and methods to help social and behavioral scientists better answer the questions they ask. Currently I'm exploring Bayesian (informative) hypothesis testing in both mixed effects and network models.
 
-Outside of research, I'm interested in professional sports (mainly NBA basketball), cheese, and chess.
+Outside of research, I'm interested in professional sports, cheese, and chess.
 
