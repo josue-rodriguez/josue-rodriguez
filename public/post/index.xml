@@ -5,7 +5,7 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 16 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon.png</url>
       <title>Posts</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Model Selection Bias</title>
       <link>/post/model-selection-bias/</link>
-      <pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       <guid>/post/model-selection-bias/</guid>
       <description>
 
@@ -59,7 +59,7 @@ researched as a technology. (p. 802)&lt;/p&gt;
 &lt;div id=&#34;small-simulation-study&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Small simulation study&lt;/h1&gt;
 &lt;p&gt;I would like to illustrate the effect of model selection on inference with a recent project I’ve been working on.&lt;/p&gt;
-&lt;p&gt;In psychology, network researchers are often interested in estimating the conditional (in)dependence structure between a set of variables, say PTSD symptoms, using partial correlation networks, or Gaussian graphical models. Typically this involves a model selection stage where partial correlations are set to zero either through a hypothesis test or some form of regularization, &lt;em&gt;and then&lt;/em&gt; parameters are estimated. As previously mentioned, this can have a serious effect on inference. To show this effect, I will check the coverage rates and sampling distributions for a parameter of interest with and without selecting a model. Namely, I use the sum of partial correlations, or “edges”, for a given variable (i.e., “expected influence”).&lt;/p&gt;
+&lt;p&gt;In psychology, network researchers are often interested in estimating the conditional (in)dependence structure between a set of variables, say PTSD symptoms, using partial correlation networks, or Gaussian graphical models. Typically this involves a data-driven model selection stage where partial correlations are set to zero either through a hypothesis test or some form of regularization, &lt;em&gt;and then&lt;/em&gt; parameters are estimated. As previously mentioned, this can have a serious effect on inference. To show this effect, I will check the coverage rates and sampling distributions for a parameter of interest with and without selecting a model. Namely, I use the sum of partial correlations, or “edges”, for a given variable (i.e., “expected influence”).&lt;/p&gt;
 &lt;p&gt;To do so, I used the &lt;code&gt;R&lt;/code&gt; package &lt;a href=&#34;https://github.com/donaldRwilliams/BGGM&#34;&gt;BGGM&lt;/a&gt; &lt;span class=&#34;citation&#34;&gt;(Williams &amp;amp; Mulder, 2019)&lt;/span&gt;&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt; to estimate networks with and without a model selection stage. This package estimates networks under a Bayesian framework so credible intervals were computed instead of confidence intervals. Although credible intervals have a different interpretation than confidence intervals,&lt;a href=&#34;#fn4&#34; class=&#34;footnote-ref&#34; id=&#34;fnref4&#34;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt; their coverage properties remain the same.&lt;a href=&#34;#fn5&#34; class=&#34;footnote-ref&#34; id=&#34;fnref5&#34;&gt;&lt;sup&gt;5&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The simulation steps went as follows:&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;

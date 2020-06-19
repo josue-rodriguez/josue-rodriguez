@@ -1,7 +1,7 @@
 ---
 title: "Model Selection Bias"
 author: "Josue E. Rodriguez"
-date: "2020-06-16"
+date: "2020-06-18"
 output: 
   html_document:
     toc: true
@@ -81,7 +81,7 @@ If we do this repeatedly --- collect some new data, select a model, and fit it w
 
 I would like to illustrate the effect of model selection on inference with a recent project I've been working on. 
 
-In psychology, network researchers are often interested in estimating the conditional (in)dependence structure between a set of variables, say PTSD symptoms, using partial correlation networks, or Gaussian graphical models. Typically this involves a model selection stage where partial correlations are set to zero either through a hypothesis test or some form of regularization, *and then* parameters are estimated. As previously mentioned, this can have a serious effect on inference. To show this effect, I will check the coverage rates and sampling distributions for a parameter of interest with and without selecting a model. Namely, I use the sum of partial correlations, or "edges", for a given variable (i.e., "expected influence"). 
+In psychology, network researchers are often interested in estimating the conditional (in)dependence structure between a set of variables, say PTSD symptoms, using partial correlation networks, or Gaussian graphical models. Typically this involves a data-driven model selection stage where partial correlations are set to zero either through a hypothesis test or some form of regularization, *and then* parameters are estimated. As previously mentioned, this can have a serious effect on inference. To show this effect, I will check the coverage rates and sampling distributions for a parameter of interest with and without selecting a model. Namely, I use the sum of partial correlations, or "edges", for a given variable (i.e., "expected influence"). 
 
 To do so, I used the `R` package [BGGM](https://github.com/donaldRwilliams/BGGM) [@williamsBayesian2019a] ^[If you have any interest in network models at all I highly suggest checking out the BGGM package! It offers a variety of flexible methods for both exploratory and confirmatory analyses plus it now handles ordinal data and VAR models] to estimate networks with and without a model selection stage. This package estimates networks under a Bayesian framework so credible intervals were computed instead of confidence intervals. Although credible intervals have a different interpretation than confidence intervals ^[A 90% credible interval can literally be interpreted as a 90% probability that the true parameter value is covered, given the data], their coverage properties remain the same ^["frequentist properties of Bayesian methods" is a good google search if you're bored]. 
 

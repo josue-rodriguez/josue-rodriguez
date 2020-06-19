@@ -1,7 +1,7 @@
 ---
 title: "Model Selection Bias"
 author: "Josue E. Rodriguez"
-date: "2020-06-16"
+date: "2020-06-18"
 output: 
   html_document:
     toc: true
@@ -57,7 +57,7 @@ researched as a technology. (p. 802)</p>
 <div id="small-simulation-study" class="section level1">
 <h1>Small simulation study</h1>
 <p>I would like to illustrate the effect of model selection on inference with a recent project I’ve been working on.</p>
-<p>In psychology, network researchers are often interested in estimating the conditional (in)dependence structure between a set of variables, say PTSD symptoms, using partial correlation networks, or Gaussian graphical models. Typically this involves a model selection stage where partial correlations are set to zero either through a hypothesis test or some form of regularization, <em>and then</em> parameters are estimated. As previously mentioned, this can have a serious effect on inference. To show this effect, I will check the coverage rates and sampling distributions for a parameter of interest with and without selecting a model. Namely, I use the sum of partial correlations, or “edges”, for a given variable (i.e., “expected influence”).</p>
+<p>In psychology, network researchers are often interested in estimating the conditional (in)dependence structure between a set of variables, say PTSD symptoms, using partial correlation networks, or Gaussian graphical models. Typically this involves a data-driven model selection stage where partial correlations are set to zero either through a hypothesis test or some form of regularization, <em>and then</em> parameters are estimated. As previously mentioned, this can have a serious effect on inference. To show this effect, I will check the coverage rates and sampling distributions for a parameter of interest with and without selecting a model. Namely, I use the sum of partial correlations, or “edges”, for a given variable (i.e., “expected influence”).</p>
 <p>To do so, I used the <code>R</code> package <a href="https://github.com/donaldRwilliams/BGGM">BGGM</a> <span class="citation">(Williams &amp; Mulder, 2019)</span><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> to estimate networks with and without a model selection stage. This package estimates networks under a Bayesian framework so credible intervals were computed instead of confidence intervals. Although credible intervals have a different interpretation than confidence intervals,<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> their coverage properties remain the same.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 <p>The simulation steps went as follows:</p>
 <ol style="list-style-type: decimal">
