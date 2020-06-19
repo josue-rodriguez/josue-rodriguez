@@ -63,7 +63,7 @@ Although students are commonly taught to remove "insignificant" predictors or us
 
 ## Why does this occur? 
 
-An assumption behind the majority of inferential procedures is that the model is **fixed**, but model selection makes the model itself **random**. Inferential procedures typically do not account for this stochastic aspect. Let's take a second to think about why model selection introduces randomness by using confidence intervals. 
+An assumption behind the majority of inferential procedures is that the model is **fixed**, but model selection makes the model itself **random**. Inferential procedures typically do not account for this stochastic aspect. Using confidence intervals, let's take a second to think about why model selection introduces randomness. 
 
 
 [Wikipedia](https://en.wikipedia.org/wiki/Confidence_interval#Meaning_and_interpretation) defines a 90% confidence interval in terms of sampling by stating 
@@ -99,14 +99,14 @@ Note, to clearly show the distorted sampling distribution, I kept track of the l
 
 ## Coverage
 
-After running this simulations, taking the means of `covered_condit` and `covered_full` yields the proportion of times that the credible interval covered the true parameter value when a model was selected and when it was not.
+After running the simulations, taking the means of `covered_condit` and `covered_full` yields the proportion of times that the credible interval covered the true parameter value when a model was selected and when it was not.
 
 ```{r echo=FALSE}
 coverage_plot
 ```
 
 
-It is clear to see from this plot that when a model is not selected, the coverage rate is just about what we would expect --- about 90 in every 100 credible intervals contained the true value for expected influence. But, when the model was selected prior to computing this interval, the true value was covered much less frequently. Approximately only 70 in 100 times!
+It is clear to see from this plot that when a model is not selected, the coverage rate is just about what we would expect --- approximately 90 in every 100 credible intervals contained the true value for expected influence. But, when the model was selected prior to computing this interval, the true value was covered much less frequently. Only about 70 in 100 times!
 
 
 ## Sampling Distribution
@@ -123,13 +123,13 @@ The simulations and plots are simple, but they convey a powerful idea. Model sel
 
 I'd like to emphasize that what I have briefly discussed in this post should not be confused with uncertainty in the model selection process ^[To account for uncertainty in model selection some propose model averaging], but rather that drawing *valid* post-model-selection inference is (almost) impossible ^[There is a growing body of literature on "undoing" model selection bias, but it is not yet a mature body of literature].
 
-As mentioned above, researchers often estimate parameters after selecting parameters, for example, expected influence. However, as we saw, this invalidates inferential procedures. A simple remedy would be to simply forgo the model selection process and estimate this parameter with the full model. Inference can then be conducted on this value. If one *must* select a model, a simple solution is to perform data-splitting. That is, split your data into two parts, use one part for model selection, and use the other for inference. To quote Cosma Shalizi, "Sample splitting is a simple, radical, almost a-theoretical way to solve the problem of post-selection inference". 
+As mentioned above, researchers often estimate parameters after selecting parameters, for example, expected influence. However, as we saw, this invalidates inferential procedures. A simple remedy would be to simply forgo the model selection process and estimate this parameter with the full model. Inference can then be conducted on the parameters of interest. If one *must* select a model, a straightforward solution is to perform data-splitting. That is, split your data into two parts, use one part for model selection, and use the other for inference. In fact, according to Cosma Shalizi, "Sample splitting is a simple, radical, almost a-theoretical way to solve the problem of post-selection inference...". 
 
-Moreover, it may be tempting to this that because inference is conditional on the data, issues with post-model-selection inference does not apply. This is not so (as shown in the plots above). Model selection with Bayesian methods leads to a selective posterior due to a truncated likelihood [@panigrahiScalable2017; @panigrahiIntegrative2020].
+Moreover, it may be tempting to think that because Bayesian inference is conditional on the data, issues with post-selection inference does not apply. This is not so (as shown in the plots above). Model selection with Bayesian methods leads to a selective posterior due to a truncated likelihood [@panigrahiScalable2017; @panigrahiIntegrative2020].
 
-I'd like to conclude with a nice quote from @hyndman_2018
+I'd like to conclude with a nice cautionary quote 
 
-> We do not discuss statistical inference...(e.g., looking at  *p*-values associated with each predictor). If you do wish to look at the statistical significance of the predictors, beware that any procedure involving selecting predictors *first* will invalidate the assumptions behind the *p*-values. The [data-driven] procedures we recommend for selecting predictors are helpful when the model is used for [prediction]; they are not helpful if you wish to study the effect of any predictor (p.168)
+> We do not discuss statistical inference...(e.g., looking at  *p*-values associated with each predictor). If you do wish to look at the statistical significance of the predictors, beware that any procedure involving selecting predictors *first* will invalidate the assumptions behind the *p*-values. The [data-driven] procedures we recommend for selecting predictors are helpful when the model is used for [prediction]; they are not helpful if you wish to study the effect of any predictor [@hyndman_2018, p.168]
 
 
 

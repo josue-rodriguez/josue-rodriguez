@@ -44,7 +44,7 @@ researched as a technology. (p. 802)</p>
 <!-- here add the note that to be selected, the effect must be large, which suggests that the sampling distribution is not, say, normal, but truncated normal (see for example X).. --></p>
 <div id="why-does-this-occur" class="section level2">
 <h2>Why does this occur?</h2>
-<p>An assumption behind the majority of inferential procedures is that the model is <strong>fixed</strong>, but model selection makes the model itself <strong>random</strong>. Inferential procedures typically do not account for this stochastic aspect. Let’s take a second to think about why model selection introduces randomness by using confidence intervals.</p>
+<p>An assumption behind the majority of inferential procedures is that the model is <strong>fixed</strong>, but model selection makes the model itself <strong>random</strong>. Inferential procedures typically do not account for this stochastic aspect. Using confidence intervals, let’s take a second to think about why model selection introduces randomness.</p>
 <p><a href="https://en.wikipedia.org/wiki/Confidence_interval#Meaning_and_interpretation">Wikipedia</a> defines a 90% confidence interval in terms of sampling by stating</p>
 <blockquote>
 <p>Were this procedure to be repeated on numerous samples, the fraction of calculated confidence intervals (which would differ for each sample) that encompass the true population parameter would tend toward 90%."</p>
@@ -71,9 +71,9 @@ researched as a technology. (p. 802)</p>
 <p>Note, to clearly show the distorted sampling distribution, I kept track of the largest single partial correlation included in the expected influence calculation. The code I used for this simulation can be found at the bottom of this post.</p>
 <div id="coverage" class="section level2">
 <h2>Coverage</h2>
-<p>After running this simulations, taking the means of <code>covered_condit</code> and <code>covered_full</code> yields the proportion of times that the credible interval covered the true parameter value when a model was selected and when it was not.</p>
+<p>After running the simulations, taking the means of <code>covered_condit</code> and <code>covered_full</code> yields the proportion of times that the credible interval covered the true parameter value when a model was selected and when it was not.</p>
 <p><img src="/post/model-selection-bias_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>It is clear to see from this plot that when a model is not selected, the coverage rate is just about what we would expect — about 90 in every 100 credible intervals contained the true value for expected influence. But, when the model was selected prior to computing this interval, the true value was covered much less frequently. Approximately only 70 in 100 times!</p>
+<p>It is clear to see from this plot that when a model is not selected, the coverage rate is just about what we would expect — approximately 90 in every 100 credible intervals contained the true value for expected influence. But, when the model was selected prior to computing this interval, the true value was covered much less frequently. Only about 70 in 100 times!</p>
 </div>
 <div id="sampling-distribution" class="section level2">
 <h2>Sampling Distribution</h2>
@@ -85,11 +85,11 @@ researched as a technology. (p. 802)</p>
 <div id="discussion" class="section level1">
 <h1>Discussion</h1>
 <p>I’d like to emphasize that what I have briefly discussed in this post should not be confused with uncertainty in the model selection process,<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> but rather that drawing <em>valid</em> post-model-selection inference is (almost) impossible.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
-<p>As mentioned above, researchers often estimate parameters after selecting parameters, for example, expected influence. However, as we saw, this invalidates inferential procedures. A simple remedy would be to simply forgo the model selection process and estimate this parameter with the full model. Inference can then be conducted on this value. If one <em>must</em> select a model, a simple solution is to perform data-splitting. That is, split your data into two parts, use one part for model selection, and use the other for inference. To quote Cosma Shalizi, “Sample splitting is a simple, radical, almost a-theoretical way to solve the problem of post-selection inference”.</p>
-<p>Moreover, it may be tempting to this that because inference is conditional on the data, issues with post-model-selection inference does not apply. This is not so (as shown in the plots above). Model selection with Bayesian methods leads to a selective posterior due to a truncated likelihood <span class="citation">(Panigrahi et al., 2020; Panigrahi &amp; Taylor, 2017)</span>.</p>
-<p>I’d like to conclude with a nice quote from <span class="citation">Hyndman &amp; Athanasopoulos (2018)</span></p>
+<p>As mentioned above, researchers often estimate parameters after selecting parameters, for example, expected influence. However, as we saw, this invalidates inferential procedures. A simple remedy would be to simply forgo the model selection process and estimate this parameter with the full model. Inference can then be conducted on the parameters of interest. If one <em>must</em> select a model, a straightforward solution is to perform data-splitting. That is, split your data into two parts, use one part for model selection, and use the other for inference. In fact, according to Cosma Shalizi, “Sample splitting is a simple, radical, almost a-theoretical way to solve the problem of post-selection inference…”.</p>
+<p>Moreover, it may be tempting to think that because Bayesian inference is conditional on the data, issues with post-selection inference does not apply. This is not so (as shown in the plots above). Model selection with Bayesian methods leads to a selective posterior due to a truncated likelihood <span class="citation">(Panigrahi et al., 2020; Panigrahi &amp; Taylor, 2017)</span>.</p>
+<p>I’d like to conclude with a nice cautionary quote</p>
 <blockquote>
-<p>We do not discuss statistical inference…(e.g., looking at <em>p</em>-values associated with each predictor). If you do wish to look at the statistical significance of the predictors, beware that any procedure involving selecting predictors <em>first</em> will invalidate the assumptions behind the <em>p</em>-values. The [data-driven] procedures we recommend for selecting predictors are helpful when the model is used for [prediction]; they are not helpful if you wish to study the effect of any predictor (p.168)</p>
+<p>We do not discuss statistical inference…(e.g., looking at <em>p</em>-values associated with each predictor). If you do wish to look at the statistical significance of the predictors, beware that any procedure involving selecting predictors <em>first</em> will invalidate the assumptions behind the <em>p</em>-values. The [data-driven] procedures we recommend for selecting predictors are helpful when the model is used for [prediction]; they are not helpful if you wish to study the effect of any predictor <span class="citation">(Hyndman &amp; Athanasopoulos, 2018, p. 168)</span></p>
 </blockquote>
 <pre class="r"><code>#==========
 # Set up 
