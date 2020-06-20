@@ -22,7 +22,7 @@ tags:
 <div id="what-is-model-selection-bias" class="section level1">
 <h1>What is model selection bias?</h1>
 <p>To understand model selection bias, it is helpful to understand what constitutes model selection.</p>
-<p><strong>Model selection</strong> occurs when a procedure in which the data itself is used to select variables, or the final model. This includes when statistical models are chosen based on things like minimizing cross-validation error, penalty-based criteria (e.g., AIC, LASSO, etc.) or stagewise selection, among others.</p>
+<p><strong>Model selection</strong> occurs when a data-driven procedure is used to select variables, or the final model. This includes when statistical models are chosen based on things like minimizing cross-validation error, penalty-based criteria (e.g., AIC, LASSO, etc.) or stagewise selection, among others.</p>
 <p><strong>Model selection bias</strong> occurs when, after a model selection procedure, researchers proceed with inference “as usual” (i.e., as if the model were known <em>a priori</em>; <span class="citation">Leeb &amp; Pötscher (2005)</span>).</p>
 <p>The notion of model selection bias is nicely summarized in <span class="citation">Berk et al. (2013)</span>,</p>
 <blockquote>
@@ -31,8 +31,7 @@ intervals assuming a wall of separation between the selection of a model and the
 analysis of the data being modeled. In practice, this separation rarely exists, and
 more often a model is “found” by a data-driven selection process. As a consequence
 inferential guarantees derived from classical theory are invalidated. Among
-model selection methods that are problematic for classical inference, variable selection
-stands out because it is regularly taught, commonly practiced and highly
+model selection methods that are problematic for classical inference, variable selection stands out because it is regularly taught, commonly practiced and highly
 researched as a technology. (p. 802)</p>
 </blockquote>
 <p>In psychology, perhaps the most common example of model selection bias occurs with linear models. Say you estimate a multiple regression and after examining the predictors and their associated <em>p</em>-values, you decide to drop those with “non-significant” <em>p</em>-values according to some <span class="math inline">\(\alpha\)</span> level. You then refit the model using only the “significant” predictors and proceed with inference. This procedure is a form of model selection and the resulting inference will suffer from model selection bias.</p>

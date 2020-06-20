@@ -24,7 +24,7 @@
 &lt;div id=&#34;what-is-model-selection-bias&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;What is model selection bias?&lt;/h1&gt;
 &lt;p&gt;To understand model selection bias, it is helpful to understand what constitutes model selection.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Model selection&lt;/strong&gt; occurs when a procedure in which the data itself is used to select variables, or the final model. This includes when statistical models are chosen based on things like minimizing cross-validation error, penalty-based criteria (e.g., AIC, LASSO, etc.) or stagewise selection, among others.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Model selection&lt;/strong&gt; occurs when a data-driven procedure is used to select variables, or the final model. This includes when statistical models are chosen based on things like minimizing cross-validation error, penalty-based criteria (e.g., AIC, LASSO, etc.) or stagewise selection, among others.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Model selection bias&lt;/strong&gt; occurs when, after a model selection procedure, researchers proceed with inference “as usual” (i.e., as if the model were known &lt;em&gt;a priori&lt;/em&gt;; &lt;span class=&#34;citation&#34;&gt;Leeb &amp;amp; Pötscher (2005)&lt;/span&gt;).&lt;/p&gt;
 &lt;p&gt;The notion of model selection bias is nicely summarized in &lt;span class=&#34;citation&#34;&gt;Berk et al. (2013)&lt;/span&gt;,&lt;/p&gt;
 &lt;blockquote&gt;
@@ -33,8 +33,7 @@ intervals assuming a wall of separation between the selection of a model and the
 analysis of the data being modeled. In practice, this separation rarely exists, and
 more often a model is “found” by a data-driven selection process. As a consequence
 inferential guarantees derived from classical theory are invalidated. Among
-model selection methods that are problematic for classical inference, variable selection
-stands out because it is regularly taught, commonly practiced and highly
+model selection methods that are problematic for classical inference, variable selection stands out because it is regularly taught, commonly practiced and highly
 researched as a technology. (p. 802)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;In psychology, perhaps the most common example of model selection bias occurs with linear models. Say you estimate a multiple regression and after examining the predictors and their associated &lt;em&gt;p&lt;/em&gt;-values, you decide to drop those with “non-significant” &lt;em&gt;p&lt;/em&gt;-values according to some &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; level. You then refit the model using only the “significant” predictors and proceed with inference. This procedure is a form of model selection and the resulting inference will suffer from model selection bias.&lt;/p&gt;

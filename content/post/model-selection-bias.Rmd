@@ -37,7 +37,7 @@ Over the last few months, a frequent topic of conversation with my [lab mate Don
 
 To understand model selection bias, it is helpful to understand what constitutes model selection. 
 
-**Model selection** occurs when a procedure in which the data itself is used to select variables, or the final model. This includes when statistical models are chosen based on things like minimizing cross-validation error, penalty-based criteria (e.g., AIC, LASSO, etc.) or stagewise selection, among others.
+**Model selection** occurs when a data-driven procedure is used to select variables, or the final model. This includes when statistical models are chosen based on things like minimizing cross-validation error, penalty-based criteria (e.g., AIC, LASSO, etc.) or stagewise selection, among others.
 
 **Model selection bias** occurs when, after a model selection procedure, researchers proceed with inference "as usual" (i.e., as if the model were known *a priori*; @leebMODEL2005).
 
@@ -48,8 +48,7 @@ intervals assuming a wall of separation between the selection of a model and the
 analysis of the data being modeled. In practice, this separation rarely exists, and
 more often a model is “found” by a data-driven selection process. As a consequence
 inferential guarantees derived from classical theory are invalidated. Among
-model selection methods that are problematic for classical inference, variable selection
-stands out because it is regularly taught, commonly practiced and highly
+model selection methods that are problematic for classical inference, variable selection stands out because it is regularly taught, commonly practiced and highly
 researched as a technology. (p. 802)
 
 In psychology, perhaps the most common example of model selection bias occurs with linear models. Say you estimate a multiple regression and after examining the predictors and their associated *p*-values, you decide to drop those with "non-significant" *p*-values according to some $\alpha$ level. You then refit the model using only the "significant" predictors and proceed with inference. This procedure is a form of model selection and the resulting inference will suffer from model selection bias. 
