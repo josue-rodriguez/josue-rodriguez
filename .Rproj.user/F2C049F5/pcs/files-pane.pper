@@ -1,9 +1,9 @@
 {
-    "path" : "C:/Users/josue/GitHub/josue-rodriguez/public",
-    "sortOrder" : [
+    "path": "C:/Users/josue/GitHub/josue-rodriguez",
+    "sortOrder": [
         {
-            "ascending" : true,
-            "columnIndex" : 2
+            "columnIndex": 2,
+            "ascending": true
         }
     ]
 }
