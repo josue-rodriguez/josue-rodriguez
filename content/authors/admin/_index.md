@@ -39,9 +39,6 @@ social:
 - icon: github
   icon_pack: fab
   link: https://github.com/josue-rodriguez
-- icon: osf
-  icon_pack: ai
-  link: google.com
 
 superuser: true
 user_groups:
