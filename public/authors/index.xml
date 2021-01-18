@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Authors | Josue Rodriguez</title>
-    <link>/authors/</link>
-      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://josue.rbind.io/authors/</link>
+      <atom:link href="https://josue.rbind.io/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon.png</url>
+      <url>https://josue.rbind.io/img/icon.png</url>
       <title>Authors</title>
-      <link>/authors/</link>
+      <link>https://josue.rbind.io/authors/</link>
     </image>
     
     <item>
       <title></title>
-      <link>/authors/admin/</link>
+      <link>https://josue.rbind.io/authors/admin/</link>
       <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>/authors/admin/</guid>
-      <description>&lt;p&gt;Hi! My name is Josue. I am a first year graduate student in Quantitative Psychology at UC Davis. Prior to beginning my PhD, I attended Humboldt State University where I completed a BA and MA in Experimental Psychology, along with a minor in statistics. I’m interested in developing statistical tools and methods to help social and behavioral scientists better answer the questions they ask. Currently I&amp;rsquo;m exploring Bayesian (informative) hypothesis testing in both mixed effects and network models.&lt;/p&gt;
-&lt;p&gt;Outside of research, I&amp;rsquo;m interested in professional sports, cheese, and chess.&lt;/p&gt;
+      <guid>https://josue.rbind.io/authors/admin/</guid>
+      <description>&lt;p&gt;Hi! My name is Josue. I am a second year graduate student in Quantitative Psychology at UC Davis. Prior to beginning my PhD, I attended Humboldt State University where I completed a BA and MA in Psychology, along with a minor in statistics. I’m interested in developing statistical tools and methods to help social and behavioral scientists better answer the questions they ask. Currently I&amp;rsquo;m exploring Bayesian hypothesis testing in both mixed effects and network models.&lt;/p&gt;
+&lt;p&gt;Outside of research, I maintain several interests. I am an avid fan of playing and watching basketball and I enjoy keeping up with the the NFL. Recently, I&amp;rsquo;ve also learned how chess pieces move, so I&amp;rsquo;ve been trying my hand at that. In my home, I like to try cooking different types of food (if you&amp;rsquo;ve never cooked with a wok, I highly recommend it). Generally, I like activities that allow me to learn new things and continully improve at them.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Robert Ford</title>
-      <link>/authors/robert-ford/</link>
+      <link>https://josue.rbind.io/authors/robert-ford/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>/authors/robert-ford/</guid>
+      <guid>https://josue.rbind.io/authors/robert-ford/</guid>
       <description></description>
     </item>
     
