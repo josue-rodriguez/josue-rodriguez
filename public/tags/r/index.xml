@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R | Josue Rodriguez</title>
-    <link>/tags/r/</link>
-      <atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://josue.rbind.io/tags/r/</link>
+      <atom:link href="https://josue.rbind.io/tags/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon.png</url>
+      <url>https://josue.rbind.io/img/icon.png</url>
       <title>R</title>
-      <link>/tags/r/</link>
+      <link>https://josue.rbind.io/tags/r/</link>
     </image>
     
     <item>
       <title>Model Selection Bias</title>
-      <link>/post/model-selection-bias/</link>
+      <link>https://josue.rbind.io/post/model-selection-bias/</link>
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>/post/model-selection-bias/</guid>
+      <guid>https://josue.rbind.io/post/model-selection-bias/</guid>
       <description>
 
 
@@ -25,8 +25,8 @@
 &lt;h1&gt;What is model selection bias?&lt;/h1&gt;
 &lt;p&gt;To understand model selection bias, it is helpful to understand what constitutes model selection.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Model selection&lt;/strong&gt; occurs when a data-driven procedure is used to select variables, or the final model. This includes when statistical models are chosen based on things like minimizing cross-validation error, penalty-based criteria (e.g., AIC, LASSO, etc.) or stagewise selection, among others.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Model selection bias&lt;/strong&gt; occurs when, after a model selection procedure, researchers proceed with inference “as usual” (i.e., as if the model were known &lt;em&gt;a priori&lt;/em&gt;; &lt;span class=&#34;citation&#34;&gt;Leeb &amp;amp; Pötscher (2005)&lt;/span&gt;).&lt;/p&gt;
-&lt;p&gt;The notion of model selection bias is nicely summarized in &lt;span class=&#34;citation&#34;&gt;Berk et al. (2013)&lt;/span&gt;,&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Model selection bias&lt;/strong&gt; occurs when, after a model selection procedure, researchers proceed with inference “as usual” (i.e., as if the model were known &lt;em&gt;a priori&lt;/em&gt;; &lt;span class=&#34;citation&#34;&gt;(&lt;span class=&#34;citeproc-not-found&#34; data-reference-id=&#34;leebMODEL2005&#34;&gt;&lt;strong&gt;???&lt;/strong&gt;&lt;/span&gt;)&lt;/span&gt;).&lt;/p&gt;
+&lt;p&gt;The notion of model selection bias is nicely summarized in &lt;span class=&#34;citation&#34;&gt;Berk et al. (&lt;a href=&#34;#ref-berkValid2013&#34; role=&#34;doc-biblioref&#34;&gt;2013&lt;/a&gt;)&lt;/span&gt;,&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Classical statistical theory grants validity of statistical tests and confidence
 intervals assuming a wall of separation between the selection of a model and the
@@ -41,7 +41,7 @@ researched as a technology. (p. 802)&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;why-does-model-selection-bias-matter&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Why does model selection bias matter?&lt;/h1&gt;
-&lt;p&gt;Although students are commonly taught to remove “insignificant” predictors or use information criteria to find the most parsimonious model, &lt;strong&gt;model selection bias distorts the sampling distribution of parameter estimates and results in more Type I errors&lt;/strong&gt; &lt;span class=&#34;citation&#34;&gt;(Berk et al., 2013; Leeb &amp;amp; Pötscher, 2005)&lt;/span&gt;.
+&lt;p&gt;Although students are commonly taught to remove “insignificant” predictors or use information criteria to find the most parsimonious model, &lt;strong&gt;model selection bias distorts the sampling distribution of parameter estimates and results in more Type I errors&lt;/strong&gt; &lt;span class=&#34;citation&#34;&gt;(&lt;span class=&#34;citeproc-not-found&#34; data-reference-id=&#34;leebMODEL2005&#34;&gt;&lt;strong&gt;???&lt;/strong&gt;&lt;/span&gt;; Berk et al., &lt;a href=&#34;#ref-berkValid2013&#34; role=&#34;doc-biblioref&#34;&gt;2013&lt;/a&gt;)&lt;/span&gt;.
 &lt;!-- here add the note that to be selected, the effect must be large, which suggests that the sampling distribution is not, say, normal, but truncated normal (see for example X).. --&gt;&lt;/p&gt;
 &lt;div id=&#34;why-does-this-occur&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Why does this occur?&lt;/h2&gt;
@@ -59,7 +59,7 @@ researched as a technology. (p. 802)&lt;/p&gt;
 &lt;h1&gt;Small simulation study&lt;/h1&gt;
 &lt;p&gt;I would like to illustrate the effect of model selection on inference with a recent project I’ve been working on.&lt;/p&gt;
 &lt;p&gt;In psychology, network researchers are often interested in estimating the conditional (in)dependence structure between a set of variables, say PTSD symptoms, using partial correlation networks, or Gaussian graphical models. Typically this involves a data-driven model selection stage where partial correlations are set to zero either through a hypothesis test or some form of regularization, &lt;em&gt;and then&lt;/em&gt; parameters are estimated. As previously mentioned, this can have a serious effect on inference. To show this effect, I will check the coverage rates and sampling distributions for a parameter of interest with and without selecting a model. Namely, I use the sum of partial correlations, or “edges”, for a given variable (i.e., “expected influence”).&lt;/p&gt;
-&lt;p&gt;To do so, I used the &lt;code&gt;R&lt;/code&gt; package &lt;a href=&#34;https://github.com/donaldRwilliams/BGGM&#34;&gt;BGGM&lt;/a&gt; &lt;span class=&#34;citation&#34;&gt;(Williams &amp;amp; Mulder, 2019)&lt;/span&gt;&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt; to estimate networks with and without a model selection stage. This package estimates networks under a Bayesian framework so credible intervals were computed instead of confidence intervals. Although credible intervals have a different interpretation than confidence intervals,&lt;a href=&#34;#fn4&#34; class=&#34;footnote-ref&#34; id=&#34;fnref4&#34;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt; their coverage properties remain the same.&lt;a href=&#34;#fn5&#34; class=&#34;footnote-ref&#34; id=&#34;fnref5&#34;&gt;&lt;sup&gt;5&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;To do so, I used the &lt;code&gt;R&lt;/code&gt; package &lt;a href=&#34;https://github.com/donaldRwilliams/BGGM&#34;&gt;BGGM&lt;/a&gt; &lt;span class=&#34;citation&#34;&gt;(Williams &amp;amp; Mulder, &lt;a href=&#34;#ref-williamsBayesian2019a&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt;&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt; to estimate networks with and without a model selection stage. This package estimates networks under a Bayesian framework so credible intervals were computed instead of confidence intervals. Although credible intervals have a different interpretation than confidence intervals,&lt;a href=&#34;#fn4&#34; class=&#34;footnote-ref&#34; id=&#34;fnref4&#34;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt; their coverage properties remain the same.&lt;a href=&#34;#fn5&#34; class=&#34;footnote-ref&#34; id=&#34;fnref5&#34;&gt;&lt;sup&gt;5&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The simulation steps went as follows:&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Randomly sample observations from a multivariate normal distribution&lt;/li&gt;
@@ -73,13 +73,13 @@ researched as a technology. (p. 802)&lt;/p&gt;
 &lt;div id=&#34;coverage&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Coverage&lt;/h2&gt;
 &lt;p&gt;After running the simulations, taking the means of &lt;code&gt;covered_condit&lt;/code&gt; and &lt;code&gt;covered_full&lt;/code&gt; yields the proportion of times that the credible interval covered the true parameter value when a model was selected and when it was not.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/model-selection-bias_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://josue.rbind.io/post/model-selection-bias_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It is clear to see from this plot that when a model is not selected, the coverage rate is just about what we would expect — approximately 90 in every 100 credible intervals contained the true value for expected influence. But, when the model was selected prior to computing this interval, the true value was covered much less frequently. Only about 70 in 100 times!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;sampling-distribution&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Sampling Distribution&lt;/h2&gt;
 &lt;p&gt;Recall that model selection also distorts the sampling distribution of parameters. In the simulations, I kept track of the partial correlation between variables 1 and 6. On each simulation trial, I simply took the mean of the posterior distribution for this parameter. While we would expect to see the means normally distributed around the true value (red line), the distribution is truncated when a model is selected.&lt;a href=&#34;#fn6&#34; class=&#34;footnote-ref&#34; id=&#34;fnref6&#34;&gt;&lt;sup&gt;6&lt;/sup&gt;&lt;/a&gt; This results in overconfident inferences about the population value. Also notice that parameters estimated after model selection are biased towards large effects. This makes sense as larger effects are more likely to be “significant”.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/model-selection-bias_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://josue.rbind.io/post/model-selection-bias_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The simulations and plots are simple, but they convey a powerful idea. Model selection distorts inferential properties such as coverage rates and sampling distributions.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -87,10 +87,10 @@ researched as a technology. (p. 802)&lt;/p&gt;
 &lt;h1&gt;Discussion&lt;/h1&gt;
 &lt;p&gt;I’d like to emphasize that what I have briefly discussed in this post should not be confused with uncertainty in the model selection process,&lt;a href=&#34;#fn7&#34; class=&#34;footnote-ref&#34; id=&#34;fnref7&#34;&gt;&lt;sup&gt;7&lt;/sup&gt;&lt;/a&gt; but rather that drawing &lt;em&gt;valid&lt;/em&gt; post-model-selection inference is (almost) impossible.&lt;a href=&#34;#fn8&#34; class=&#34;footnote-ref&#34; id=&#34;fnref8&#34;&gt;&lt;sup&gt;8&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;As mentioned above, researchers often estimate parameters after selecting parameters, for example, expected influence. However, as we saw, this invalidates inferential procedures. A simple remedy would be to simply forgo the model selection process and estimate this parameter with the full model. Inference can then be conducted on the parameters of interest. If one &lt;em&gt;must&lt;/em&gt; select a model, a straightforward solution is to perform data-splitting. That is, split your data into two parts, use one part for model selection, and use the other for inference. In fact, according to Cosma Shalizi, “Sample splitting is a simple, radical, almost a-theoretical way to solve the problem of post-selection inference…”.&lt;/p&gt;
-&lt;p&gt;Moreover, it may be tempting to think that because Bayesian inference is conditional on the data, issues with post-selection inference does not apply. This is not so (as shown in the plots above). Model selection with Bayesian methods leads to a selective posterior due to a truncated likelihood &lt;span class=&#34;citation&#34;&gt;(Panigrahi et al., 2020; Panigrahi &amp;amp; Taylor, 2017)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Moreover, it may be tempting to think that because Bayesian inference is conditional on the data, issues with post-selection inference does not apply. This is not so (as shown in the plots above). Model selection with Bayesian methods leads to a selective posterior due to a truncated likelihood &lt;span class=&#34;citation&#34;&gt;(Panigrahi et al., &lt;a href=&#34;#ref-panigrahiIntegrative2020&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;; Panigrahi &amp;amp; Taylor, &lt;a href=&#34;#ref-panigrahiScalable2017&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;I’d like to conclude with a nice cautionary quote&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;We do not discuss statistical inference…(e.g., looking at &lt;em&gt;p&lt;/em&gt;-values associated with each predictor). If you do wish to look at the statistical significance of the predictors, beware that any procedure involving selecting predictors &lt;em&gt;first&lt;/em&gt; will invalidate the assumptions behind the &lt;em&gt;p&lt;/em&gt;-values. The [data-driven] procedures we recommend for selecting predictors are helpful when the model is used for [prediction]; they are not helpful if you wish to study the effect of any predictor &lt;span class=&#34;citation&#34;&gt;(Hyndman &amp;amp; Athanasopoulos, 2018, p. 168)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;We do not discuss statistical inference…(e.g., looking at &lt;em&gt;p&lt;/em&gt;-values associated with each predictor). If you do wish to look at the statistical significance of the predictors, beware that any procedure involving selecting predictors &lt;em&gt;first&lt;/em&gt; will invalidate the assumptions behind the &lt;em&gt;p&lt;/em&gt;-values. The [data-driven] procedures we recommend for selecting predictors are helpful when the model is used for [prediction]; they are not helpful if you wish to study the effect of any predictor &lt;span class=&#34;citation&#34;&gt;(Hyndman &amp;amp; Athanasopoulos, &lt;a href=&#34;#ref-hyndman_2018&#34; role=&#34;doc-biblioref&#34;&gt;2018&lt;/a&gt;, p. 168)&lt;/span&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#==========
 # Set up 
@@ -202,9 +202,6 @@ for (iter in 1:niter){
 &lt;div id=&#34;ref-hyndman_2018&#34;&gt;
 &lt;p&gt;Hyndman, R. J., &amp;amp; Athanasopoulos, G. (2018). &lt;em&gt;Forecasting: Principles and practice&lt;/em&gt; (Second, p. 168). OTexts.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;ref-leebMODEL2005&#34;&gt;
-&lt;p&gt;Leeb, H., &amp;amp; Pötscher, B. M. (2005). MODEL SELECTION AND INFERENCE: FACTS AND FICTION. &lt;em&gt;Econometric Theory&lt;/em&gt;, &lt;em&gt;21&lt;/em&gt;(01). &lt;a href=&#34;https://doi.org/10.1017/S0266466605050036&#34;&gt;https://doi.org/10.1017/S0266466605050036&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
 &lt;div id=&#34;ref-panigrahiScalable2017&#34;&gt;
 &lt;p&gt;Panigrahi, S., &amp;amp; Taylor, J. (2017). Scalable methods for Bayesian selective inference. &lt;em&gt;arXiv:1703.06176 [Stat]&lt;/em&gt;. &lt;a href=&#34;http://arxiv.org/abs/1703.06176&#34;&gt;http://arxiv.org/abs/1703.06176&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -219,14 +216,14 @@ for (iter in 1:niter){
 &lt;div class=&#34;footnotes&#34;&gt;
 &lt;hr /&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Other fields as well but I’m in psychology so that is my focus&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;One could argue that this is not an issue with a consistent model selector or large enough sample sizes, but see &lt;span class=&#34;citation&#34;&gt;Leeb &amp;amp; Pötscher (2005)&lt;/span&gt;&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;If you have any interest in network models at all I highly suggest checking out the BGGM package! It offers a variety of flexible methods for both exploratory and confirmatory analyses plus it now handles ordinal data and VAR models&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn4&#34;&gt;&lt;p&gt;A 90% credible interval can literally be interpreted as a 90% probability that the true parameter value is covered, given the data&lt;a href=&#34;#fnref4&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn5&#34;&gt;&lt;p&gt;“frequentist properties of Bayesian methods” is a good google search if you’re bored&lt;a href=&#34;#fnref5&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn6&#34;&gt;&lt;p&gt;There are methods to correct this truncation, but this is still an active area of research&lt;a href=&#34;#fnref6&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn7&#34;&gt;&lt;p&gt;To account for uncertainty in model selection some propose model averaging&lt;a href=&#34;#fnref7&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn8&#34;&gt;&lt;p&gt;There is a growing body of literature on “undoing” model selection bias, but it is not yet a mature body of literature&lt;a href=&#34;#fnref8&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Other fields as well but I’m in psychology so that is my focus&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;One could argue that this is not an issue with a consistent model selector or large enough sample sizes, but see &lt;span class=&#34;citation&#34;&gt;(&lt;span class=&#34;citeproc-not-found&#34; data-reference-id=&#34;leebMODEL2005&#34;&gt;&lt;strong&gt;???&lt;/strong&gt;&lt;/span&gt;)&lt;/span&gt;&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;If you have any interest in network models at all I highly suggest checking out the BGGM package! It offers a variety of flexible methods for both exploratory and confirmatory analyses plus it now handles ordinal data and VAR models&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn4&#34;&gt;&lt;p&gt;A 90% credible interval can literally be interpreted as a 90% probability that the true parameter value is covered, given the data&lt;a href=&#34;#fnref4&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn5&#34;&gt;&lt;p&gt;“frequentist properties of Bayesian methods” is a good google search if you’re bored&lt;a href=&#34;#fnref5&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn6&#34;&gt;&lt;p&gt;There are methods to correct this truncation, but this is still an active area of research&lt;a href=&#34;#fnref6&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn7&#34;&gt;&lt;p&gt;To account for uncertainty in model selection some propose model averaging&lt;a href=&#34;#fnref7&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn8&#34;&gt;&lt;p&gt;There is a growing body of literature on “undoing” model selection bias, but it is not yet a mature body of literature&lt;a href=&#34;#fnref8&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>

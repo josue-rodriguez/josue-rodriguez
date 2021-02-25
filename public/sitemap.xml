@@ -33,6 +33,41 @@
   </url>
   
   <url>
+    <loc>https://josue.rbind.io/tags/inference/</loc>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://josue.rbind.io/tags/model-selection/</loc>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://josue.rbind.io/post/model-selection-bias/</loc>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://josue.rbind.io/post/</loc>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://josue.rbind.io/tags/r/</loc>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://josue.rbind.io/tags/</loc>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://josue.rbind.io/post/tutorial-bayesian-testing/</loc>
+    <lastmod>2020-05-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://josue.rbind.io/courses/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
@@ -69,11 +104,6 @@
   
   <url>
     <loc>https://josue.rbind.io/tags/source-themes/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://josue.rbind.io/tags/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
   </url>
   
@@ -139,10 +169,6 @@
   
   <url>
     <loc>https://josue.rbind.io/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://josue.rbind.io/post/</loc>
   </url>
   
 </urlset>

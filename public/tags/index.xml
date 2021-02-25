@@ -5,12 +5,36 @@
     <link>https://josue.rbind.io/tags/</link>
       <atom:link href="https://josue.rbind.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://josue.rbind.io/img/icon.png</url>
       <title>Tags</title>
       <link>https://josue.rbind.io/tags/</link>
     </image>
+    
+    <item>
+      <title>inference</title>
+      <link>https://josue.rbind.io/tags/inference/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://josue.rbind.io/tags/inference/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>model selection</title>
+      <link>https://josue.rbind.io/tags/model-selection/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://josue.rbind.io/tags/model-selection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>https://josue.rbind.io/tags/r/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://josue.rbind.io/tags/r/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Source Themes</title>
