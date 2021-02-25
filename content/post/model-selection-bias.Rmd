@@ -7,7 +7,7 @@ output:
     toc: true
     toc_float: true
     toc_depth: 4
-draft: true
+draft: false
 bibliography: [C:/Users/josue/Box/testing-sums/ref.bib]
 csl: apa.csl
 tags: 
@@ -18,7 +18,7 @@ tags:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, message = FALSE)
-knitr::opts_knit$set(root.dir = "C:/Users/josue/Box/testing-sums/01-code")
+knitr::opts_knit$set(root.dir = "C:/Users/josue/Box/Papers/03-testing-sums-incomplete/01-code")
 ```
 
 ```{r libs, include=FALSE}

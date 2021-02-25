@@ -7,14 +7,14 @@ output:
     toc: true
     toc_float: true
     toc_depth: 4
-draft: true
+draft: false
 bibliography: [C:/Users/josue/Box/formalizing-expectations/references.bib]
 csl: apa.csl
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
-knitr::opts_knit$set(root.dir = "C:/Users/josue/Box/formalizing-expectations/04-tutorial-blog")
+knitr::opts_knit$set(root.dir = "C:/Users/josue/Box/Papers/02-formalizing-expectations/04-tutorial-blog")
 
 ```
 ```{r include=FALSE}
