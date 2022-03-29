@@ -1,9 +1,9 @@
 {
-    "path" : "~/GitHub/josue-rodriguez",
-    "sortOrder" : [
+    "path": "C:/Users/jer421/GitHub/josue-rodriguez",
+    "sortOrder": [
         {
-            "ascending" : true,
-            "columnIndex" : 2
+            "columnIndex": 2,
+            "ascending": true
         }
     ]
 }
