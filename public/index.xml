@@ -29,6 +29,14 @@
     </item>
     
     <item>
+      <title>Courses</title>
+      <link>https://josue.rbind.io/courses/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://josue.rbind.io/courses/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Publications</title>
       <link>https://josue.rbind.io/publication/</link>
       <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
@@ -49,22 +57,6 @@
       <link>https://josue.rbind.io/project/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       <guid>https://josue.rbind.io/project/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link></link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid></guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Courses</title>
-      <link>https://josue.rbind.io/courses/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://josue.rbind.io/courses/</guid>
       <description></description>
     </item>
     
