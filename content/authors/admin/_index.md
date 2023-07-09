@@ -45,6 +45,8 @@ superuser: true
 user_groups:
 ---
 
-Hi! My name is Josue. I'm a fourth year graduate student in Quantitative Psychology at UC Davis. Prior to beginning my PhD, I attended Humboldt State University where I completed a BA and MA in Psychology, along with a minor in statistics. I’m interested in developing statistical tools and methods to help social and behavioral scientists better answer the questions they ask. In my current research, I'm exploring Bayesian variable selection methods and mixed-effects models.
+Hi! My name is Josue. I'm a fourth year graduate student in Quantitative Psychology at UC Davis and a data scientist at McGraw Hill. When I was younger, I attended Humboldt State University, where I completed a BA and MA in Psychology, along with a minor in statistics. 
 
-Outside of research, I maintain several interests. I am an avid fan of playing and watching basketball and I enjoy keeping up with the the NFL. I also spend time playing chess. At home, I like to try cooking different types of food (if you've never cooked with a wok, I highly recommend it). Generally, I like activities that allow me to learn new things and continually improve at them.
+I’m interested in developing statistical tools and methods to help social and behavioral scientists better answer the questions they ask. In my current research, I'm exploring Bayesian variable selection methods and mixed-effects models. At work, I'm helping build longitudinal profiles of students' educational journey to personalize learning at scale.
+
+The things I like to do outside of work include playing and watching sports (mostly basketball and \[american\] football). I also spend time playing watching and playing chess. At home, I like to try cooking different types of food and experiment with different techniques. Generally, I like activities that allow me to learn new things and continually improve at them.
