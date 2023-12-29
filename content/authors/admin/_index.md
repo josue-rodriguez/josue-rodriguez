@@ -6,31 +6,33 @@ education:
   courses:
   - course: PhD in Quantitative Psychology
     institution: University of California, Davis
-    year: expected 2023
-  - course: MA in Psychology
-    institution: Humboldt State University
+    year: 2023
+  - course: MA in Experimental Psychology
+    institution: Cal Poly Humboldt
     year: 2019
   - course: Minor in Statistics
-    institution: Humboldt State University
+    institution: Cal Poly Humboldty
     year: 2019
   - course: BA in Psychology
-    institution: Humboldt State University
+    institution: Cal Poly Humboldt
     year: 2017
 email: ""
 interests: 
-- Mixed-effects modeling
-- Meta-analysis
-- Bayesian inference
-- Gaussian graphical modeling
-name: Josue Rodriguez
+- Bayesian statistics 
+- A/B testing and experimental design
+- Machine learning
+- Causal inference
+- Predictive inference
+
+name: Josue Rodriguez, PhD
 organizations:
-- name: University of California, Davis
+- name: McGraw Hill
   url: ""
-role: PhD Student, Quantitative Psychology
+role: Data Scientist
 social:
 - icon: envelope
   icon_pack: fas
-  link: 'mailto:jerrodriguez@ucdavis.edu'
+  link: 'mailto:josue.rodriguez594@gmail.com'
 - icon: twitter
   icon_pack: fab
   link: https://twitter.com/josueRstats
@@ -45,8 +47,6 @@ superuser: true
 user_groups:
 ---
 
-Hi! My name is Josue. I'm a fourth year graduate student in Quantitative Psychology at UC Davis and a data scientist at McGraw Hill. When I was younger, I attended Humboldt State University, where I completed a BA and MA in Psychology, along with a minor in statistics. 
+Hi! My name is Josue. I'm a data scientist at McGraw Hill where I'm helping build personalized learning experiences at scale. Previously, I completed my PhD in Quantitative Psychology at UC Davis where I focused on developing Bayesian models for social-behavior science.
 
-I’m interested in developing statistical tools and methods to help social and behavioral scientists better answer the questions they ask. In my current research, I'm exploring Bayesian variable selection methods and mixed-effects models. At work, I'm helping build longitudinal profiles of students' educational journey to personalize learning at scale.
-
-The things I like to do outside of work include playing and watching sports (mostly basketball and \[american\] football). I also spend time playing watching and playing chess. At home, I like to try cooking different types of food and experiment with different techniques. Generally, I like activities that allow me to learn new things and continually improve at them.
+<!-- The things I like to do outside of work include playing and watching sports (mostly basketball and \[american\] football). I also spend time playing watching and playing chess. At home, I like to try cooking different types of food and experiment with different techniques. Generally, I like activities that allow me to learn new things and continually improve at them. -->
